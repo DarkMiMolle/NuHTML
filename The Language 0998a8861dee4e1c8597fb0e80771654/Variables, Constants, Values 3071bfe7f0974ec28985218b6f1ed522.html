@@ -1,0 +1,750 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Variables, Constants, Values</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3071bfe7-f097-4ec2-8985-218b6f1ed522" class="page sans"><header><h1 class="page-title">Variables, Constants, Values</h1></header><div class="page-body"><p id="6ac4ea73-a5c2-4968-ada3-2fe6167e18d1" class="">
+</p><nav id="4cde4e6a-ab7e-4bcd-875e-a3a16167e0b6" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#18845186-11b7-4927-b04c-4c521048ef37">1 - Variables</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#244d1184-53ad-46ba-aae8-cb845938ddfa">1.1 - Declaration</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6065ed96-e511-40c2-a4b7-e468c23e6d98">1.2 - Assignment </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a412a198-0933-4330-b380-392c619ceeaa">1.2 - Default value ?</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#820caf9a-7ae8-4d05-a998-caa21b874508">2 - Constants</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c5fd98db-bae2-480c-b16f-92d699a0d2c3">2.1 - Global</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1ffba902-0250-45db-8ffe-ccdc1ff27bce">2.2 - Scoped constants</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2f41f84d-bd1c-42c0-9236-665037243636">3 - Values</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#95ed6c44-f60b-450d-814d-38efd38bfd7b">3.1 - Typed RValue</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9299ca4c-b17d-47aa-b565-afaf8e6a70dc">3.2 - RValue storage (aka <em>const expression</em>)</a></div></nav><p id="2053de26-c7f5-4b6b-ab9f-540b4d3fbf04" class="">
+</p><h1 id="18845186-11b7-4927-b04c-4c521048ef37" class="">1 - Variables</h1><p id="f1604f4f-2dfa-404a-a0ba-adb31872c392" class="">
+</p><p id="72709e47-84da-44b5-bd56-d22a63f37ca5" class="">Variables are a mandatory aspect of the nowadays programming language. It is the way to store the result of an expression, and use it.</p><h2 id="244d1184-53ad-46ba-aae8-cb845938ddfa" class="">1.1 - Declaration</h2><p id="169f180c-d0d0-45fd-966d-fbee61bc35e0" class="">Every variable has a type, and can only store value of the same type.</p><pre id="b8a87034-d846-4a5d-8c46-666b50539236" class="code"><code>package main
+
+func main() {
+	var variable int
+}</code></pre><p id="ab7dc3a9-5966-4f7a-9e9f-d1573b549ced" class="">Here, &quot;variable&quot; is... a variable of type <em>int</em> which is one of the built in type of <em>Nu</em> representing an integer.
+In <em>Nu</em> every variable are initialized, to avoid storing random unknown value, but it is also possible to initialize variable manually.</p><pre id="6c28e617-a0f1-4567-88de-54941ee12c2b" class="code"><code>package main
+func main() {
+	var realNumber float = 18.31
+}</code></pre><p id="3bcebc6b-e60a-4503-a366-5feeb22b1094" class="">We&#x27;ve declare the variable &quot;realNumber&quot; of type <em>float</em> to the value &quot;18.31&quot; (<em>float</em> is a builtin type representing a floating point number)
+Now, it would be convenient to be able to declare multiple variable, of multiple type.
+like:</p><pre id="d1e50216-8333-41b3-8ec1-524bdd303716" class="code"><code>package main
+func main() {
+	var v1, v2 string, v3 int = 42, v4 char = &#x27;N&#x27;
+}</code></pre><p id="180c00ab-cb5e-4de4-8d71-a6a6fdd36219" class="">&quot;v1&quot; and &quot;v2&quot; are both <code>string</code>(builtin type representing a text: string of character), &quot;v4&quot; is a <code>char</code> (builtin type representing a character). So the type applies to all variables untyped yet. That&#x27;s why &quot;v1&quot; is <code>string</code><em>.</em>  The other rule to do that kind of declaration is that before the first user-initialization, all variable must be typed, and after the first user-initialization, every variable must be user-initialized.
+
+If a variable is user-initialized, it is possible to not specify the type and let the language infer it automatically.</p><pre id="26503f44-b737-4291-ba43-66fd7bc8baa5" class="code"><code>package main
+func main() {
+	var v1, v2 int, v3 = &quot;this is a string&quot;
+}</code></pre><p id="ada6e40a-cf48-4fd9-9dbf-eacb63f17142" class="">&quot;v3&quot; will be infer as a <em>string</em>.
+However, the language will infer the most simple type possible, so <code>var a = 42</code> will never give a <code>float</code>.
+
+When user-initialized, it is also possible to remove the <code>var</code> keyword, and use the declaration operator &#x27;:=&#x27;.</p><pre id="c97ae504-7af3-4e4f-bcf1-d24f14af1ad2" class="code"><code>package main
+func main() {
+	v1 := 42 // v1 declared with value 42 (int)
+}</code></pre><p id="4cad5bf9-9ff9-4dd0-90ca-2ac00192fc64" class="">It is still possible to declare multiple variable with that way:</p><pre id="3907ffea-49d3-44bf-8186-6ab8ad511d39" class="code"><code>package main
+func main() {
+	v1, v2, v3 := &quot;string, int, char&quot;, 18, &#x27;N&#x27;
+}</code></pre><p id="536d12cd-0361-4fe0-ba1a-3011cf2554d0" class="">One last thing. So far all example show the use of variable inside a function (<code>func main() { /*...*/}</code>), but it is possible to declare variable in the <em>Global Space</em> meaning directly in the <code>package</code>.
+However, those variable must be declare with the keyword <code>var</code>.</p><pre id="355f93e1-de39-4f6d-8936-a72ec715dc4d" class="code"><code>package main
+var global = 42 // impossible to use &#x27;:=&#x27;
+func main() {
+	noGlobal := global
+}</code></pre><p id="fa06cfc2-9491-40b8-81c4-fcea9dd4774c" class=""><a href="">Top </a>   |   <a href=""> Bottom</a></p><h2 id="6065ed96-e511-40c2-a4b7-e468c23e6d98" class="">1.2 - Assignment </h2><p id="3f5e4d1f-f881-4140-8482-29c73627149e" class="">The principe of variables is they are... well variable. So it is possible to assign them value even after declaration.</p><pre id="fa5e40f0-084d-43af-b0e1-c95a4b66ec13" class="code"><code>package main
+func main() {
+	var i int
+	i = 31
+}</code></pre><p id="3949ca0c-9359-4e86-a99a-7b833853d65a" class="">At first &quot;i&quot; has the <code>int</code> default value (which is 0), and then we assign &quot;31&quot; to &quot;i&quot; so &quot;i&quot; has the value &quot;31&quot;.
+It is possible to assign multiple value to multiple variable at the same time.</p><pre id="1c461bf1-384c-4982-a8ec-7b44b19714ef" class="code"><code>package main
+func main() {
+	var v1, v2 int
+	v1, v2 = 42, 24
+	v1, v2 = v2, v1
+}</code></pre><p id="b961ca56-86a5-4134-baf5-b6572e7bdc6b" class="">At first we declare &quot;v1&quot; and &quot;v2&quot; as <code>int</code>, then we assign them respectively 42 and 24, so &quot;v1&quot; = 42 and &quot;v2&quot; = 24.
+Then <code>v1, v2 = v2, v1</code>. Yes, of course, a variable is considered like a value of the type mentioned by the variable. So here, &quot;v1&quot; = &quot;v2&quot; (which is 42) and &quot;v2&quot; = &quot;v1&quot; (which is 24). That line is a swap of those two variable.</p><p id="34e2b724-f7b9-4c18-b07f-51ac656507dd" class=""><a href="https://www.notion.so/Variables-constants-values-2539245e665f40c1bd8eaf4af4b3ac78">Top</a>    |    <a href="">Bottom</a></p><h2 id="a412a198-0933-4330-b380-392c619ceeaa" class="">1.2 - Default value ?</h2><p id="caa2fc82-00e4-46f2-aa26-cebbbf55a2f1" class="">As said earlier, every variable non user-initialized have a default value. Sometimes, it may be useful to know when the variable is the default value or not. That&#x27;s why it is possible to check it.</p><pre id="84321051-018f-40f8-801d-3a5afe6e1806" class="code"><code>package main
+func main() {
+	var v1 int, v2 = 0
+	if v1 == default {
+		// ...
+	}
+	if v2 != default {
+		//...
+	}
+}</code></pre><p id="a4f79a3d-3c7f-4c25-97d7-08118da5237c" class="">here, <code>v1 == default</code> and <code>v2 != default</code> are boolean expressions (meaning expressions of type <code>bool</code>, a builtin type for the values <code>true</code> and <code>false</code>), both equal to <code>true</code>, because &quot;v1&quot; is the non user-initialized, so it is <code>default</code>, and reversely for &quot;v2&quot;.
+The declaration with the &#x27;declare&#x27; operator will never give a variable <code>default</code>.</p><p id="8c8f8201-3c14-4aa7-8d88-0cf6b3143eba" class="">What is interesting to notice, is that <code>v1 == v2</code> would be <code>true</code> because the <code>default</code> value of <code>int</code> is 0 !</p><p id="83d2e3b6-e8d7-46c4-8479-ef2872daa11b" class=""><a href="">Top </a>   |    <a href="">Bottom</a></p><h1 id="820caf9a-7ae8-4d05-a998-caa21b874508" class="">2 - Constants</h1><h2 id="c5fd98db-bae2-480c-b16f-92d699a0d2c3" class="">2.1 - Global</h2><p id="9af92d21-1a26-4208-b6f5-0078a122a9f2" class="">Constants are like variables, except they must be user-initialized and they can&#x27;t be assigned.
+The define operator not allows to define constants neither.</p><pre id="d82f4942-af0c-4c17-a39b-424f771744d7" class="code"><code>package main
+const c int = 42
+func main() {
+	v := 18
+	const c2 = v
+}</code></pre><p id="58980d68-908f-433d-8d96-a619c0f04c14" class="">It is possible to use type inference, and even assign it from a variable.
+After that, a constant represent the value it holds (but can&#x27;t change its value unlike variable).
+It is also possible to declare multiple constant of multiple type.</p><pre id="e0ebf8bb-a7e5-408a-9759-8c646e521014" class="code"><code>package main
+const a = 18, b = 31
+func main() {
+	const c, d = 42, b
+}</code></pre><p id="f96c6113-d3e2-430a-addc-c3b01d1af87c" class="">A constant can&#x27;t change value.</p><p id="766bb533-183e-44b6-ae5a-0a4427febd39" class=""><a href="">Top </a>   |    <a href="">Bottom</a></p><h2 id="1ffba902-0250-45db-8ffe-ccdc1ff27bce" class="">2.2 - Scoped constants</h2><p id="a9e54649-da99-479b-8924-530e2c415934" class="">Rules for constants inside a scope have a particularity. They can be assign ones.</p><pre id="728501a1-ea5b-4816-9849-fee60f59b4c7" class="code"><code>package main
+const cst = 42 // Global constant, must be user-initialized
+func main() {
+	const cst2 // Declare, but not usable !
+	cst2 = 18 // now cst2 is usable
+}</code></pre><p id="3db6d538-15c2-4087-8859-7867ac2442b8" class="">&quot;cst2&quot; is inside the function scope, so it is possible to only declare it; however, it won&#x27;t be usable until <em>Nu</em> knows it has been initialised.</p><p id="e301e0fd-a216-4eac-b1b7-3cb634302d1d" class="">We&#x27;ll see later with if-branchement, than a constant must be initialised in all branchement to be use after, or in no-one.</p><p id="6aad5c8a-1899-43d3-a01e-d5ebaa8eb43b" class=""><a href="https://www.notion.so/Variables-constants-values-2539245e665f40c1bd8eaf4af4b3ac78">Top</a>    |    <a href="">Bottom</a></p><h1 id="2f41f84d-bd1c-42c0-9236-665037243636" class="">3 - Values</h1><p id="a78f679a-77b2-4ad4-bb88-8240e5aa927c" class="">From <a href="https://www.notion.so/Variables-constants-values-2539245e665f40c1bd8eaf4af4b3ac78">the start</a> of that chapter we are talking about &quot;Values&quot;. It&#x27;s time to learn more about what can be done with the </p><h2 id="95ed6c44-f60b-450d-814d-38efd38bfd7b" class="">3.1 - Typed RValue</h2><p id="cccda120-f82e-449b-b3fb-9b8812c1a604" class="">RValues aka Right Values, are literal values: values written in hand, not store in variable nor constant yet.
+42 is an <code>int</code> RValue, &quot;rval&quot; is a <code>string</code> RValue.
+It is possible however to user-type those value. By calling the constructor of the type, or by adding the type name after the value.</p><pre id="3cb6c302-eaac-42f1-b56c-70db32299faa" class="code"><code>package main
+func main() {
+	var val = int{23} // 1
+	val2 := 18 float // 2
+}</code></pre><p id="210dc901-da7f-491f-b7aa-3b0535e0947e" class="">With &quot;1&quot; we use the constructor of the type. It is represented with the type followed by value(s) surrounded by &#x27;{}&#x27;. If it&#x27;s a little blurry, don&#x27;t worry, we&#x27;ll re-speak of constructor with the chapter Structures.
+With &quot;2&quot; we are typeing the RValue directly, so &quot;val2&quot; is a <code>float</code>. This work, only because it exists a link between <code>int</code> and <code>float</code>; we&#x27;ll see that link in the Chapter Type and Casts.</p><p id="edcb29e6-e71a-4a3a-b0e3-78c8d7ea2235" class=""><a href="">Top </a>   |    <a href="">Bottom</a></p><h2 id="9299ca4c-b17d-47aa-b565-afaf8e6a70dc" class="">3.2 - RValue storage (aka <em>const expression</em>)</h2><p id="f3cfecb3-00d1-4e3a-b7c8-03c858cc248d" class="">Now comes the final kind of storage. It is a way to &quot;store&quot; the RValues. Actually, it won&#x27;t really store them, it will directly emplace the RValue it contains.
+RValue must be known at the compile time, so the expression must be static (not depend of the execution)</p><pre id="c0600475-218d-4455-8242-18508f5309b1" class="code"><code>package main
+func main() {
+	const! val = float{42}
+	variable := val - 28 // &lt;=&gt; variable := float{42} - 28
+}</code></pre><p id="338d50e6-0b82-4766-b9ec-51bd7bc09d38" class="">RValues are part of the &quot;constant expression&quot;, which is expression where the value can be known at the compile time. Here the compiler knows that &quot;val&quot; has the value &quot;float{42}&quot;.
+That kind of <code>const</code>: <code>const!</code> are called <em>&quot;constexpr&quot;</em>.
+A constexpr can store only constant expression, meaning expression with only others <code>const!</code>. </p><p id="8cd284bf-3bbd-4161-8442-f28feb8a83b6" class=""><a href="https://www.notion.so/The-nu-command-line-397e6135bf79452a8e45148574626512">Previous Chapter </a>   |    <a href="">Top </a>   |    <a href="Types%20and%20cast%207d645f34db2b4301a046ab8483bb7a08.html">Next Chapter</a></p><p id="be1c142d-c679-4ee1-8d92-bb10b70962ec" class="">
+</p></div></article></body></html><script>
+	var codes = document.getElementsByTagName('code');
+	for (var i = 0; i < codes.length; i++) {
+		codes.item(i).classList.add('prettyprint', 'lang-go')
+	}
+</script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=go;skin=desert"></script>

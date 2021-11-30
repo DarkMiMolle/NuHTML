@@ -1,0 +1,811 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Pointer</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e27beace-4748-4325-8607-bb1f90dbacd8" class="page sans"><header><h1 class="page-title">Pointer</h1></header><div class="page-body"><nav id="dc763feb-45b9-4501-934e-36b9298d1df0" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7df43bda-8fe3-427e-bc57-a96ad94d15bc">1 - Pointer are reference</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e6260b5b-4ce9-4b17-8cff-dedeffb0a8cf">2 - Pointer of Pointer, get the real address</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3633d368-60f1-43f8-a517-592b2c7b18c4">3 - Create new address</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1999c80a-273a-4913-93f6-45891dbddd9b">4 - Pointer arithmetic</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#eb8c4e46-aa77-461c-91fa-02afb4e6e543">4.1 - The array pointer</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2e6bf731-b7ba-42ac-b930-ee940339e9a5">4.1 - The void pointer</a></div></nav><h1 id="7df43bda-8fe3-427e-bc57-a96ad94d15bc" class="">1 - Pointer are reference</h1><p id="8818c984-b8f8-4965-8849-15fae99a1dfe" class="">A pointer in Nu is a way to refer a same data. Actually a pointer will store the address of a data and change the value associate to it. It is <strong>NOT A COPY</strong>. Let&#x27;s see in example.</p><pre id="d8359f6e-14f7-4475-8057-b3a6f7297e82" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	a := 42
+	cio.Println(a) // print 42
+	pointer := &amp;a
+	pointer = 18
+	cio.Println(a) // print 18
+}</code></pre><p id="88a3e364-53f2-4809-b42b-5550a84abe9d" class="">the variable <em>pointer</em> point to the address of <em>a</em> so it <strong>is</strong> <em>a</em>. The address hold by a data is represented by <code>&amp;</code>.
+The type of a pointer is represented by: <code>*T</code> where <code>T</code> is the type of the value pointed.</p><pre id="3995429d-9125-41cb-b2ed-6f77c2f2935a" class="code"><code>package main
+
+import Std io.console as cio
+
+func Swap(a, b *int) {
+	tmp := a
+	a = b
+	b = tmp
+}
+
+func main() {
+	a, b := 42, 18
+	Swap(&amp;a, &amp;b)
+	cio.Println(a, b) // print 18 42
+}</code></pre><p id="1083ed05-8a4d-4ffc-955b-7c8eaeb40d9a" class="">It is not possible to take the address of a constant. However it is possible to specify we don&#x27;t want the pointer to be able to modify the value it holds.
+To represent that kind of pointer we use the type: <code>*const T</code>, which means the value holds should be considered constant. It is also possible to declare a pointer as a constant then the constant can&#x27;t change the value and it can&#x27;t change the address. It is not possible to have <em>constexpr</em> (<code>const!</code>) pointer.
+If a pointer is a variable, it is possible to change the address it points to.</p><pre id="6efbafd1-e643-47f1-8ac1-bd3d015b6980" class="code"><code>package main
+
+func main() {
+	var a, b int, ptr *int
+	// a == 0, b == 0, ptr == nullptr !!
+	ptr -&gt; a // ptr == a --&gt; &amp;ptr = &amp;a
+	ptr = 18 // a == 18
+	ptr -&gt; &amp;b // also works, ptr == b --&gt; &amp;ptr == &amp;b
+}</code></pre><p id="d79d5063-bb0e-441e-89fa-65d0cd45215d" class="">by default a pointer a the value <code>nullptr</code>, which represent an empty address. Using a pointer while it holds <code>nullptr</code> will <code>throw</code> an error at the runtime (we&#x27;ll see how to handle error later).
+With pointer there is the operator <code>-&gt;</code> that allow to change the reference. It can take a data or an address, but not RValue (<code><em>ptr → 18</em></code><em> is not possible</em>).
+To be clear. This operator is available on pointer to constant type, but not on constant pointer.</p><pre id="e9025a33-5f31-426d-a720-c10dc5113b2e" class="code"><code>package main
+
+func main() {
+	var a, b int, ptr1 *const int = &amp;a
+	const ptr2 *int = &amp;a // &lt;=&gt; const ptr2 *const int
+	ptr1 -&gt; b // ok
+	// impossible to assign ptr1: ptr1 = 42 IMPOSSIBLE because the value hold is marked const.
+}</code></pre><p id="5137a160-d417-40b6-b378-4eaf6f88c4a3" class="">In practice, we nearly never use a <code>const *T</code>.
+All pointer have an implicit cast to their subtype
+<code>*T</code> —&gt; <code>T</code></p><pre id="71427ade-8324-4e01-8523-c3d5db62b600" class="code"><code>package main
+
+func main() {
+	var a int
+	ptr := new 18
+	a = ptr // ptr is actually seen like an int.
+}</code></pre><p id="1caf52cf-cab9-443d-88ea-d9bbf4eacf40" class="">In Nu the only thing we can&#x27;t take the address of are: function, constants and expression.</p><p id="3177e9c9-4674-4a4e-9a98-67b5cf2a85d6" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h1 id="e6260b5b-4ce9-4b17-8cff-dedeffb0a8cf" class="">2 - Pointer of Pointer, get the real address</h1><p id="02161aec-38ed-4015-840e-8173e51b47f6" class="">We saw the operator <code>&amp;</code> allowed use to get the address hold by the data. So to check if 2 elements are the same we can do <code>&amp;ptr == &amp;data</code>. But how to get the address of a pointer tho ?
+With the operator <code>&amp;(</code>.<code>)</code>. This operator allows us to get the <em>real </em>address of a data. If a data is not a pointer-like type, it is equivalent to <code>&amp;</code>, but for pointer it is possible to get a pointer of pointer.</p><pre id="39b3a06d-4f49-4489-810c-5cb01bab12dd" class="code"><code>package main
+
+func main() {
+	a := 42
+	ptr1 := &amp;a
+	ptr2 := &amp;ptr1
+	// &amp;ptr1 == &amp;ptr2 == &amp;a so changing a, will change the value of ptr1 and ptr2
+	ptrptr := &amp;(ptr1)
+	// &amp;ptrptr == &amp;a, &amp;&amp;ptrptr = &amp;(ptr1)
+}</code></pre><p id="e9884a33-22e7-4f79-8244-2f0d83471471" class="">Here there are 3 pointers to <code>&amp;a</code>. But ptrptr can use the operator <code>&amp;</code> twice !
+First time to get <code>&amp;a</code>, second to get <code>&amp;(ptr)</code>.
+Then it is possible to change the address holds by ptr: <code>&amp;&amp;ptrptr = </code><em>other address. </em>It is still possible to use the <code>-&gt;</code> operator and it is possible to use as much <code>&amp;</code> as there is <code>*</code> for pointer type.</p><pre id="8eabeced-d2a6-4d3b-a5f1-a051a05a9566" class="code code-wrap"><code>package main
+
+func main() {
+	var a, b int
+	ptr := &amp;a // ptr is *int
+	pptr := &amp;(ptr) // pptr is **int
+	ppptr := &amp;(pptr) // ppptr is ***int
+	
+	ppptr -&gt; &amp;b // &lt;=&gt; &amp;ppptr = &amp;b &lt;=&gt; ptr -&gt; &amp;b
+	&amp;ppptr -&gt; new &amp;a // &lt;=&gt; &amp;&amp;ppptr = new &amp;a &lt;=&gt; &amp;pptr -&gt; new &amp;a &lt;=&gt; &amp;&amp;pptr = new &amp;a
+	&amp;&amp;ppptr -&gt; new new new 42 // &amp;&amp;&amp;ppptr = new new new 42
+}</code></pre><p id="d8277763-a34e-4fe6-86a7-8e4280cfdace" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h1 id="3633d368-60f1-43f8-a517-592b2c7b18c4" class="">3 - Create new address</h1><p id="fb16473f-71d4-4525-b7f1-6d90cd83578c" class="">It is possible to create manually address that can be used to store data. Actually we ask the OS to allocate us memory. To do so, we use the keyword <code>new</code>.</p><pre id="5848f663-94c0-4a71-8d18-7527b4f45b1a" class="code"><code>package main
+
+func main() {
+	ptr := new 42 // ptr is *int and has the value 42.
+	ptr -&gt; new int // ptr has the value int{}
+}</code></pre><p id="f421b025-2a23-4630-b182-937533965546" class="">The address is deleted/free as soon as there is nothing else that point to it (so the first <code>new</code> is deleted, when doing the second one)
+The address of a data is automatically freed. But if pointers point to it, a new address with the same data will automatically be replaced.</p><pre id="55964c30-d395-4793-92b8-730aa989d8e5" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	var ptr *int
+	{
+		a := 42 // the variable is local to the scope
+		ptr -&gt; a // ptr now points to a
+		cio.Println(&amp;ptr) // print something like: 0xff32ae67
+	}
+	cio.Println(ptr) // print 42
+	cio.Println(&amp;ptr) // print something different than 0xff32ae67
+}</code></pre><p id="4430abae-6dec-4680-b4e2-8b89938af3fc" class="">As the variable <em>a</em> doesn&#x27;t exist anymore when we are out of the scope, Nu replace all pointer by a <code>new</code> one by doing: <code>ptr -&gt; new ptr</code>.</p><p id="d4cb396b-4f19-4d78-9621-0f0ca341f7a7" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h1 id="1999c80a-273a-4913-93f6-45891dbddd9b" class="">4 - Pointer arithmetic</h1><h2 id="eb8c4e46-aa77-461c-91fa-02afb4e6e543" class="">4.1 - The array pointer</h2><p id="a7fbf15b-b728-45b0-b667-e078b4c2db9b" class="">Arrays are particular when it comes to pointer. Actually the address of an array is the address of its first element !</p><pre id="7deb41e6-f231-4880-9e73-750b7ea33681" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	var list [4]int
+	cio.Println(&amp;list, &amp;list[0]) // it will print 2 time the same address !
+// typeof(&amp;list) == *[]int, typeof(&amp;list[0]) == *int
+}</code></pre><p id="13c2af12-3b60-4a94-ae08-89343a68b905" class="">But taking the address of the array will allows to navigate through address ! Because the type of <code>&amp;list</code>, is not <em>really </em>the same than type of <code>&amp;list[0]</code>. <em>(we see more when we&#x27;ll talk about </em><a href="Type%20&amp;%20dynamics%20typing%2052561aee854b46e59225e4862a1b72bd.html"><em>Types</em></a><em>)</em></p><pre id="ec22cc01-9b47-4aa2-8d9e-392d05424e8c" class="code code-wrap"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	list := [2, 4, 6, 8, 10]
+	var ptrArr *[5]int
+	ptrArr -&gt; list // ok, ptrArr has the value &amp;list + 0
+	&amp;ptrArr++ // ok ! now ptrArr has the value &amp;list + 1 !
+	// the operator &amp; has the priority over others (except for &#x27;.&#x27; and [] operators).
+	// we would have write: ptrArr -&gt; &amp;list + 1
+}</code></pre><p id="87a3e022-85b7-4756-a542-93e274273270" class="">It is not possible to use arithmetic operators on an address that is not an array address.
+Even on array address, the length of the array is kept, so it is not possible to go behind the bounds.
+There is an implicit cast from <code>*[]T</code> to <code>*T</code>, as it only lost information.
+It is possible to get array pointer from dynamic size array ! Boundaries will be checked at runtime.</p><p id="1fb844fd-1a47-4780-90a4-4896b1b3f945" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h2 id="2e6bf731-b7ba-42ac-b930-ee940339e9a5" class="">4.1 - The void pointer</h2><p id="a6f98001-fb70-470d-afb0-2eabaeea6a20" class="">The void pointer: <code>*void</code>, is particular pointer, because he can receive any pointer, so it can&#x27;t be used to represent a value.</p><pre id="2581e8e9-7979-4416-8c46-64646752e380" class="code"><code>package main
+
+func main() {
+	var a, b int
+	var pv *void = &amp;a // implicit cast, pv = something like 0xff74ec19
+}</code></pre><p id="af186c7a-31f4-4e54-81b0-fcd4f40fa57f" class="">Like it is not possible to use the <code>*void</code> as a value, the operator <code>=</code> apply to the address directly but we still can use the <code>-&gt;</code> operator.
+However it is possible to explicitly cast it to any pointer.</p><pre id="701f1ad4-7425-4249-86eb-fe62e812e313" class="code"><code>package main
+
+import {
+	Std io.console as cio
+	Std math as _
+}
+
+func main() {
+	a := cio.Get&lt;int&gt;()
+	var pv *void = &amp;a
+	if a &gt;= 0 &amp;&amp; a &lt; pow(2, 8 * char.size) { // char.size gives the number of octet needed to write a char.
+		c := pv as *char
+		cio.Println(c) 
+	} else {
+		cio.Println(cio.Err, &quot;impossible to cast&quot;, a, &quot;to a char&quot;)	
+	}
+// congratulation, you&#x27;ve juste re-write the cast from int to char.
+}</code></pre><p id="bcf885b4-249c-49ff-a5d4-c8603e04c33b" class="">Therefore, it is also possible to cast <code>*void</code> to an array pointer ! And even to a void array pointer ! Note that it is not possible to cast a pointer to an array pointer if the pointer is not <code>*void</code>.</p><pre id="c5aeb9fc-1252-4260-b85a-82dcc6e37516" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	a := 42
+	pv := &amp;a as *void as *[2048]void + 1024 // *[2048]void with an offset of 1024
+	DANGER := (&amp;pv - 10) as string // ok, but it will certainly crash.
+	cio.Println(DANGER) // if it didn&#x27;t crash before it is possible to crash at any time
+}</code></pre><blockquote id="f54b874a-0f2d-4bec-bd8b-2e6bbbb577e6" class="">As you understood in the code and the comment; it is highly recommended to <strong>NOT</strong> use those tricks unless you really know what you&#x27;re doing.
+It is mainly a low level feature.</blockquote><p id="a4e752e3-4280-41be-900f-113b1395223a" class=""><a href="Functions%201ebd55b0df64418ab44f89530e757fb0.html">Previous Chapter</a>    |    <a href="">Top</a>    |    <a href="Extension%20a0e28eac912d424b8da56d79d14bf557.html">Next Chapter</a></p></div></article></body></html><script>
+	var codes = document.getElementsByTagName('code');
+	for (var i = 0; i < codes.length; i++) {
+		codes.item(i).classList.add('prettyprint', 'lang-go')
+	}
+</script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=go;skin=desert"></script>

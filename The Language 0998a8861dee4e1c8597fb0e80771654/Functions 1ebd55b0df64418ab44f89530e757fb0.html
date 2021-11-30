@@ -1,0 +1,778 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Functions</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1ebd55b0-df64-418a-b44f-89530e757fb0" class="page sans"><header><h1 class="page-title">Functions</h1></header><div class="page-body"><nav id="e7449b33-240f-4afc-9a6b-826c92de265a" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a0e721b0-f073-4ed6-ae0a-820abcfcc039">1 - What is a Function</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5f41af2c-6ce3-477f-ae43-86383ffc0c91">1.1 - Basic definition</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1f023656-3689-4f75-9b24-2fd3ca387fa1">1.2 - One line function</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#685bdff8-3d7f-45e2-a90a-f9c9186a285f">2 - Lambda Function</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1346f7a8-d14b-49fe-a387-ccb2e0f1f61a">3 - Multiple return type, volatile structure</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#86eb64db-bde4-46c9-8fef-730bd12742e4">3.1 - Multiple return as structures</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3ad5c1ce-1087-495b-8ee7-ca3f89643806">3.2 - the return value</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a9e835d6-9c92-4047-9839-d7982b2a0836">3.3 - volatile structure</a></div></nav><h1 id="a0e721b0-f073-4ed6-ae0a-820abcfcc039" class="">1 - What is a Function</h1><h2 id="5f41af2c-6ce3-477f-ae43-86383ffc0c91" class="">1.1 - Basic definition</h2><p id="26955095-158f-4c4b-b929-80af2a32b592" class="">A function is a code that will be <em>call </em>manually when developing. It takes parameter and may return  value(s), both together define the prototype of a function.
+In <em>Nu</em> functions are also a type define by its prototype. To start executing code, a programme need a <em>start function</em>, which is the function named <em>main</em> by default. This function can have different prototype according to the Sub nu used.
+A function can be define in <code>package</code>, <code>namespace</code> and other (we&#x27;ll see that later).
+In a <code>package</code> or <code>namespace</code>, functions must have a name, that will be use to <em>call</em> them.</p><p id="ec70e79b-a133-4c2e-bd74-75a124341c40" class="">
+</p><pre id="91b483f9-7ae5-4edb-8a09-c40e49da17ac" class="code"><code>package main
+
+func Function(parameter float) int {
+	return (parameter * 10) as int
+}
+
+func main() {
+	variable := Function(4.2)
+}</code></pre><p id="6ccdb982-7939-4288-8d19-02a2864651da" class="">&quot;Function&quot; is the name of the function, &quot;parameter&quot; is a parameter, when inside the function, we call it an argument. The parameters definition is the same as one line variables, except we don&#x27;t put the keyword <code>var</code>. It is possible to not have parameter like in the &quot;main&quot; function.
+Then we put the return type (here for &quot;Function&quot; it&#x27;s an <code>int</code>). Finally we put the code in a <em>scope</em> which is call the <em>body</em> of the function.
+The type of that function is: <code>func(float) int</code></p><p id="09664ee5-f764-4ad9-9d67-78b10e57e23b" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h2 id="1f023656-3689-4f75-9b24-2fd3ca387fa1" class="">1.2 - One line function</h2><p id="4e23d90b-42e7-48dc-b4e6-0871291789b7" class="">It is possible to make function in one line (if there is only one statement or expression). In that case, the syntax is a little different.
+First it is then not mandatory to mark the return type, then instead of making a <em>scope</em> we put <code>=&gt;</code> and the one line code without using the <code>return</code> keyword. Code that can&#x27;t be declaration.</p><pre id="9a9c127c-9356-457f-9c81-7887ab4efc5e" class="code"><code>package main
+
+func Function(parameter float) =&gt; (parameter * 10) as int
+
+func main() {
+	variable := Function(4.2)
+}</code></pre><p id="bef22bec-b8bb-41cb-9bd4-7efa3a47633b" class="">The one line function have another particularity; they are inlined in the code.</p><p id="2379ae7c-72e8-43b4-98e1-6291cd32610b" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h1 id="685bdff8-3d7f-45e2-a90a-f9c9186a285f" class="">2 - Lambda Function</h1><p id="5e3d41d0-38ed-498c-a154-4ccf15b5259d" class="">It is possible to manipulate functions as value, so it is possible to have variables and constants of functions. </p><pre id="3185b6d5-fcfd-4480-a1ea-e30f9de9840e" class="code"><code>package main
+
+import Std io.console as cio
+
+func square(val int) =&gt; val * val
+
+func main() {
+	transformation := square // var transformation func(int)int = square
+	cio.Println(transformation(5)) // print 25
+	transformation = func(val int) =&gt; val + val
+	cio.Println(transformation(5)) // print 10
+}
+</code></pre><p id="f03301d1-2ec4-4409-ba4f-06b98d23aac2" class="">It is possible to use the syntax with scope:
+<code>func(val int) { return val + val }</code>
+The type of function is <em><code>func(</code></em><em>parameter types</em><em><code>)</code></em><em>return type</em>; the name of the parameters don&#x27;t matter.
+Lambda have a particularity. They can manage the capture of element from the current scope.
+By default a lambda capture the whole scope by constant reference, meaning we can use variable of the scope and change it, and if they are changed out of the function their value will also change inside the function. But it is possible to specify the kind of capture we want.</p><pre id="495783a6-581c-46c4-8090-1c1fd140b204" class="code code-wrap"><code>package main
+
+func main() {
+	var a int, b string, c bool
+	f := func(&amp;, val int) { // &lt;=&gt; func(val int) ...
+		a = val
+	}
+	f(42) // now a = 42 !
+	f2 := func(&amp;const) =&gt; b == &quot;Yes&quot;
+	if f2() then f(18) else then f(31)
+	// f2() == false (b == &quot;&quot;) then a = 31
+	b = &quot;Yes&quot;
+	if f2() then f(18) else then f(31)
+	// now b == &quot;Yes&quot; so f2() = true then a = 18
+
+	f3 := func(=, val int) =&gt; if c then -&gt; f(val) 
+	// f3 will never do something cause c == false at the creation
+	c = true
+	f3 = func(=, val int) =&gt; (if c then f(val))
+	// now f3 will always call f(val) !
+	// by calling f(val) it will change the value of a !!
+	f4 := func(!) =&gt; 42 // nothing is captured
+}</code></pre><p id="373198bd-e53d-4cc0-9b94-2656b1609b02" class="">with <em>f3</em> we saw something important. Even if a lambda is captured by copy (=), if itself capture by reference, it will keep the references.
+it is possible to specify behaviour for only some variables.</p><pre id="9f788902-d768-4981-beca-e8d5bc97d5ff" class="code"><code>package main
+
+func main() {
+	var a, not int, b, c, d string
+	f := func([&amp;, = a, &amp;const b, c, ! not], val int) =&gt; (val * a) as string + b + c + d
+	/* in those condition: 
+		a by copy
+		b and c by constant references
+		not is not captured
+		d as specified by the first: by reference (aka the default, we could have omitted it)
+	*/
+}</code></pre><p id="d21726a1-487a-4dd0-9b15-3b0d38a05f6f" class="">the [] is needed to indicate it will be more than one capture specificity. If we only wanted to capture <em>a</em> by copy and other by default (aka reference) we could have written:
+<code>func(= a, val int) =&gt; </code>...
+But as soon as there is 2 specificity, we need to use the brackets.
+The element itself is capture by copy after it has been created (so impossible to call it while creating it)
+One last things about lambda function.
+If we create a lambda without parameters, and with default capture, we can omit the parentheses.</p><p id="e2231d9d-03ab-4c15-b408-42c5584b4a42" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h1 id="1346f7a8-d14b-49fe-a387-ccb2e0f1f61a" class="">3 - Multiple return type, volatile structure</h1><p id="5835e4db-3a08-4032-b718-994c142d7470" class="">functions can return multiple values !</p><h2 id="86eb64db-bde4-46c9-8fef-730bd12742e4" class="">3.1 - Multiple return as structures</h2><p id="c771f2ad-0903-4ba9-8feb-620350420716" class="">By returning a lambda structure, it is possible to return multiple value at once, Nu handle it well and so simplify the return.</p><pre id="2ef3d7f8-f678-45c3-b32d-cbb0caea7c5b" class="code"><code>package main
+
+func MultipleReturn() {{a, b int}} {
+	return 18, 31 // &lt;=&gt; return {{a: 18, b: 31}}
+}
+
+func main() {
+	{a} := MultipleReturn() // &lt;=&gt; a := MutlipleReturn().a
+}</code></pre><p id="733f536c-3b99-40f5-94cd-2a9851e54a94" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h2 id="3ad5c1ce-1087-495b-8ee7-ca3f89643806" class="">3.2 - the return value</h2><p id="3fc4ab29-db8f-4852-aa99-67b2770c9195" class="">So fare we&#x27;ve returned value with the <code>return</code> keyword. It is possible to use the return as a value that will be returned. To use return as value we simply need to add a &#x27;.&#x27; before the <code>return</code> when using it, then it is no more mandatory to return value.</p><pre id="e5c3a685-d091-4754-9d4b-c238848fecd9" class="code"><code>package main
+
+func MultipleReturn() {{a, b int}} {
+	.return.a = 23
+}
+
+func main() {
+	{a} := MultipleReturn() // &lt;=&gt; a := MutlipleReturn().a
+}</code></pre><p id="cf13231e-0cad-4c89-b1a4-612d8e20d799" class="">This kind of return can&#x27;t be used with the one line functions.</p><p id="b8953ba0-e4b0-468b-8e51-026fcd128c25" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h2 id="a9e835d6-9c92-4047-9839-d7982b2a0836" class="">3.3 - volatile structure</h2><p id="f4a967da-49b9-4344-8773-ba52070fca4a" class="">Volatile structure are structure that can&#x27;t be stored. They stay volatile, so impossible to use the return value as a value.</p><pre id="40459852-081a-4fb5-9ed7-569f6fb7aace" class="code"><code>package main
+
+func VolatileReturn() {{int, int}} {
+	// impossible to access .return
+	return 14 18
+}
+
+func main() {
+	// impossible to write: r := VolatilReturn()
+	[start, end] := VolatileReturn() // ok, volatile structure is not stored
+	firstWW := VolatileReturn() as {{start, end int}} // ok volatile struct not stored
+}</code></pre><p id="a033e956-bd90-43c1-92b8-4f27a0e30960" class="">Cast from a volatile structure to a structure is <code>explicit</code> if the structure get all values, and else <code>delete</code>d.
+It is possible to bind volatile structure to other function argument:</p><pre id="32a2c4a8-2771-4f68-a7c0-f31cc1f1fe93" class="code"><code>package main
+
+func NextWW(start, end int) {{start, end int}} {
+	.return = {{start: start + 29, end: end + 25}}
+	if .return.start &gt;= .return.end then return 0, 0 // we stil can use the return
+}
+
+func WW(start, end int) {{int, int}} =&gt; return start, end
+
+func main() {
+	// impossible: NextWW(WW(14, 18))
+	SecondWW := NextWW(WW(14, 18)...) // ok, we use the binding
+}</code></pre><p id="4cf8684e-4524-4bef-b08d-6a4435e3e05a" class=""><em>to be clear, it is not possible to use the &quot;structure binding&quot; aka &quot;name binding&quot; because there isn&#x27;t name.</em></p><p id="61fa97bd-8d3f-4f6d-856e-b98d872fc0c7" class=""><a href="Data%20binding%20a25bc75853a843efb00ee0000423b91b.html">Previous Chapter</a>    |    <a href="">Top</a>    |    <a href="Pointer%20e27beace474843258607bb1f90dbacd8.html">Next Chapter</a></p></div></article></body></html><script>
+	var codes = document.getElementsByTagName('code');
+	for (var i = 0; i < codes.length; i++) {
+		codes.item(i).classList.add('prettyprint', 'lang-go')
+	}
+</script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=go;skin=desert"></script>

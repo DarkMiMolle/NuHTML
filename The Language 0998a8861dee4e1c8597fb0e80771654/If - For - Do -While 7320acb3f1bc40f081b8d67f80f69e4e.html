@@ -1,0 +1,898 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>If - For - Do -While</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7320acb3-f1bc-40f0-81b8-d67f80f69e4e" class="page sans"><header><h1 class="page-title">If - For - Do -While</h1></header><div class="page-body"><nav id="207d77ef-7c9a-43ce-a87e-f0cf0f374913" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cd27f1af-a83d-4921-933d-b48821e2a26c">1 - If</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7ecd95f7-2405-4787-b10e-77ecd20371a2">1.1 - If statement</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1de22d1e-ce8e-40d4-9148-6e0e40cf871f">1.2 - If expression</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0a4b9651-7c66-4065-9443-066596b8dfd2">1.3 - One line if</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b9ecd80b-bb75-461d-ac1f-d4ec649b589c">2 - For loop</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#fac5c8fc-9fab-4c28-b2dc-85270e204c76">2.1 - For to</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#08b310b2-f241-4fac-84c4-bb9241719eb7">2.2 - For each</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#79da4830-a184-492c-8786-c3e3bc77829a">2.3 - For-exp !</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e4dc4cea-4c32-4a94-a7f9-1a45dd52faab">3 - Do while and while loop</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#463c43d4-161b-4bcd-b6f4-25ebdfd31d82">3.1 - Do it while it&#x27;s true</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f90a823e-1e06-4198-8dda-8673103a4e77">3.2 - the while loop</a></div></nav><h1 id="cd27f1af-a83d-4921-933d-b48821e2a26c" class="">1 - If</h1><p id="5075cda9-d3f3-43b3-a644-2a7275772d98" class="">If allows to make conditional branches for the code execution</p><p id="f1dfbb92-b97a-497d-ba1d-9a3a2c7fe916" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h2 id="7ecd95f7-2405-4787-b10e-77ecd20371a2" class="">1.1 - If statement</h2><p id="f4612feb-9dfa-43f5-9df3-9aad7ae4cf32" class="">if statement allows to execute a code only if a condition is evaluated as <code>true</code>.</p><pre id="451bfb0f-d1e8-482a-94ba-74a13f53a05c" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	var val int
+	cio.Scan(&amp;val) // ask the user to input an int to the console, int stored in val.
+	if val == 42 {
+		cio.Print(&quot;The answer to the univers&quot;) // print the text on the console
+	}
+}</code></pre><p id="b2e5c057-4aa0-4b32-8570-2b202753889c" class="">in that example, if the user enter &quot;42&quot; in the console, then it will print &quot;The answer to the univers&quot;, but if it doesn&#x27;t, it won&#x27;t print it.
+It is possible to add a branchement for the case when the condition es evaluated to <code>false</code>.</p><pre id="9b6555d0-da31-439a-bc67-c3f77a5db5e5" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	var val int
+	cio.Scan(&amp;val) // ask the user to input an int to the console, int stored in val.
+	if val == 42 {
+		cio.Print(&quot;The answer to the univers&quot;) // print the text on the console
+	} else {
+		cio.Print(&quot;Not the answer to the univers&quot;)
+	}
+}</code></pre><p id="1b88f4c2-6956-464b-9dc5-3a2ef27ca55c" class="">now, if the user doesn&#x27;t input &quot;42&quot; it will print &quot;Not the answer to the universe&quot;.
+We notice the bracket &#x27;{&#x27; &#x27;}&#x27;, that define the <em>scope </em>for the branchement. A <em>scope</em> can access all variable from outside, but when outside the variable defined in the <em>scope</em> are destroyed and no more visible. Exactly like the difference between global variable and not global variable; global variable are in fact in the package scope (meaning the are accessible from all the package).
+
+A variable defined in the <code>if</code> <em>scope</em> is not accessible from the <code>else</code> one. However, it is possible to define if-variable that are accessible to all branchement of the scope after being defined.</p><pre id="9e011ca2-1aae-4d37-aeb2-952bded542db" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	if val := cio.Get&lt;int&gt;(); val == 42 {
+		cio.Print(&quot;The answer to the univers&quot;) // print the text on the console
+	} else {
+		cio.Print(val, &quot;is not the answer to the univers&quot;)
+	}
+}</code></pre><p id="3782b0c3-304e-47f0-ae90-3edba23a1af3" class="">cio.Get&lt;int&gt;() will do the same than cio.Scan but instead of filling the value, it will give it.
+So &quot;val&quot; is only accessible inside the <code>if</code> and <code>else</code> <em>scope</em>.
+It is possible to have more than 2 branchement.</p><pre id="1b716a4d-8f5c-4ac5-9243-cb82b963829d" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	if val := cio.Get&lt;int&gt;(); val == 42 {
+		cio.Print(&quot;The answer to the univers&quot;) // print the text on the console
+	} else if val == 1977 {
+		cio.Print(&quot;year of the first Star Wars&quot;)
+	} else {
+		cio.Print(&quot;Nothing to say about &quot;, val)
+	}
+}</code></pre><p id="10680222-0eba-46d4-ac3d-c1ad53f429b2" class=""><strong>Note: </strong>it is not possible to make &#x27;<em>if-variable</em>&#x27; to an <code>else</code> branchement.</p><p id="b3d25f55-de0a-4b99-8965-8822915a05c3" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h2 id="1de22d1e-ce8e-40d4-9148-6e0e40cf871f" class="">1.2 - If expression</h2><p id="7e268e5a-296f-4f7e-ab88-65ef3c432242" class="">If statement doesn&#x27;t represent a value, however, we may want to use if as a value (value a if condition, else value b)
+That&#x27;s why it is possible to make <em>if-expression</em>.</p><pre id="75cb05cb-6a7f-4a79-9507-eb98bb9c585b" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	val := if cio.Get&lt;int&gt;() % 2 then -&gt; &quot;mod 2&quot; else -&gt; &quot;not mod 2&quot;
+	cio.Println(val)
+}</code></pre><p id="6a30410f-03f5-4253-8ef5-b81ca6322e0f" class="">It is possible to have statement before the value, in that case brackets needs to surround the code, and add <code>-&gt;</code> before the value we want to refer:</p><pre id="7d279020-c7f0-4430-b204-c42218f75fbb" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	val := if elem := cio.Get&lt;int&gt;(); elem % 2 then {
+		if elem &gt; 10 {
+			-&gt; &quot;it&#x27;s bigger than 10&quot;
+		} else {
+			-&gt; &quot;it&#x27;s smaller than 10&quot;
+		}
+	} else -&gt; &quot;it&#x27;s odd&quot;
+}</code></pre><p id="405a59f7-7b1f-4fbd-a20c-e4187615988a" class="">Notice that we could have use an <em>if-exp</em> inside the <em>if-exp</em>.
+It is possible to not put an <code>else</code> case. In such case the type of the <em>if-exp</em> will be an optional of the <em>if</em> type.
+We&#x27;ll see optional later in the chapter about them.
+By the way it is also possible to have multiple <code>else if</code> branchement in <em>if-exp</em>.</p><pre id="c1ddc498-804c-4556-b978-4f135c23ada7" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	val :=  &quot;/ 3 Rest&quot; +  if val := cio.Get&lt;int&gt;() % 3; val == 0 then -&gt; &quot; 0&quot; 
+												else if val == 1 then -&gt; &quot; 1&quot;
+												else -&gt; &quot; 2&quot;
+	cio.Println(val)
+}</code></pre><p id="e6a8e0a9-303d-4c91-96a5-6d297534181b" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h2 id="0a4b9651-7c66-4065-9443-066596b8dfd2" class="">1.3 - One line if</h2><p id="4c98c011-adf7-44f4-bfb9-c68138e37e0a" class="">The syntax is similar to the <em>if-exp</em> expect there is no <code>-&gt;</code>.</p><pre id="6a6fdc80-349d-463a-99c6-153797509165" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	var val string
+	if cio.Get&lt;int&gt;() % 2 then val = &quot;mod 2&quot; 
+	else val = &quot;not mod 2&quot; // may be another type than val = &quot;mod 2&quot;
+	cio.Println(val)
+}</code></pre><p id="5ddd5787-361f-4a81-a815-dac3a9b9cef8" class="">It is also possible to use the <em>if-exp</em> with <code>void</code> value.</p><pre id="ff673205-374b-47b0-9703-a20865056656" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	var val string
+	if cio.Get&lt;int&gt;() % 2 then -&gt; val = &quot;mod 2&quot; // = operator gives void
+	// if there is an else, it must be the same type than val = &quot;mod 2&quot;.
+	cio.Println(val)
+}</code></pre><p id="f429aace-6eaf-4ac7-a288-effd655dc6d0" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h1 id="b9ecd80b-bb75-461d-ac1f-d4ec649b589c" class="">2 - For loop</h1><p id="650d64ce-5e20-42ce-803f-d07878d14a1b" class="">allows to repeat code with iteration</p><h2 id="fac5c8fc-9fab-4c28-b2dc-85270e204c76" class="">2.1 - For to</h2><p id="bee66f93-5921-43f9-a361-9692b42df055" class=""><em>for-to</em> is what is closest to the legacy <code>for</code> loop from other programming language. It allows to iterate from a a value to another with increment.</p><pre id="90c95e6d-a7ac-40fe-9e49-f8f0371bc61c" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	for i := 0 to 10 {
+		cio.Println(i) // Println is a print to the console with a new line
+	}
+}</code></pre><p id="bfa416ca-0d60-431f-9777-b5472d86084a" class="">This code will display:
+</p><pre id="dc8a2c25-216a-451e-96cc-b54ff15276f4" class="code"><code>0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10</code></pre><p id="c494f3d4-7ce2-497c-a824-6f6c72a8a35e" class="">This code can be read like:
+<em>for i starting at 0 and while i ≤ 10, do </em>the code<em> and increment i (by one)
+</em>It is possible to make i &lt; 10 instead of ≤.</p><pre id="9a37ee09-b9ef-430b-b286-596098c560d9" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	for i := 0 to! 10 {
+		cio.Println(i) // Println is a print to the console with a new line
+	}
+}</code></pre><p id="dbf0e054-0598-477d-a426-862015e311fe" class="">This will print from i = 0 to i = 9
+The real use of that <code>for</code> is to have the control of the incrementation.</p><pre id="234ec12f-5416-4b51-81e0-45d4682cfe97" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	for i := 0 to 10; i += 2 {
+		cio.Println(i) // Println is a print to the console with a new line
+	}
+}</code></pre><p id="338360c7-fd13-43b9-9530-c569a89ffd1d" class="">instead of printing all number from 0 to 10, it will print 0, 2, 4, ..., 10 because i increments by 2 at each loop.
+If i isn&#x27;t in the range of the &quot;to&quot;, it won&#x27;t execute the loop.
+It is possible to give an existing variable:</p><pre id="59d48460-2e37-49f9-9716-ae28c96733bb" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	var idx int
+	for idx to 10; idx += 3 {
+		cio.Println(idx) // Println is a print to the console with a new line
+	}
+	// idx == 12 ! cause idx = 9 &lt;= 10 then idx += 3 (12) &gt; 10 --&gt; end of the loop
+}</code></pre><p id="d5a450e8-5959-4417-ba01-9e9d3d190bb0" class="">This kind of <em>for-loop</em> is the less used.</p><p id="b02cf80a-22af-4860-9368-e395a082e273" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h2 id="08b310b2-f241-4fac-84c4-bb9241719eb7" class="">2.2 - For each</h2><p id="0c992e09-b7ff-41c8-87da-2100f1bb83b5" class="">The for each is the <em>for-loop</em> the most used.
+It allows to iterate over a collection (a collection is define by its operator <code>[]</code>, the iterator accessors <code>.begin</code>, <code>.end</code>, <code>.at(int)</code>, and a <code>.length</code> where <code>.begin.next(.length - 1) == .end</code>. The base collection of <em>Nu</em> are the arrays and the map aka dictionaries.</p><pre id="d73c5b23-5d87-4fcc-9833-a018e18c0f41" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	odd := [1, 3, 5, 7]
+	for elem in odd {
+		cio.Println(elem)
+	}
+}</code></pre><p id="6ffd5026-c2cf-4452-b678-092accc83888" class="">It will print the content of all odd ! &quot;elem&quot; is a reference (aka <em>pointer</em>) to the odd element(s). So changing its value inside the loop will change the odd element. It is possible to avoid that behaviour by adding <code>const</code> before the container in the loop.</p><pre id="ef72fdc9-01d3-4fa8-b631-c93f8f7a8b8f" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	odd := [1, 3, 5, 7]
+	for elem in const odd {
+		elem++
+		cio.Print(elem, _)
+	}
+}</code></pre><p id="86bfe455-8679-4acd-a765-3ffbcb7a474a" class="">Here, it will print <code>2 4 6 8</code> . But the elements of the odd array won&#x27;t change.
+The difference between both is that with <code>const</code>  element it can&#x27;t be changed, but as &quot;elem&quot; isn&#x27;t <code>const</code>, then a copy is given instead of a reference. It is less optimised, the best would be to add <code>const</code> before &quot;elem&quot; so it wouldn&#x27;t be changeable, and the compiler would give a const reference.</p><pre id="422e8cfd-4cee-4eb9-9ff0-eb82ba20dd7e" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	odd := [1, 3, 5, 7]
+	for const elem, idx in const odd {
+		// elem++ not possible anymore as elem is const
+		cio.Print(&quot;odd[&quot;, idx, &quot;] =&quot;, elem, &#x27;&#x27;) // print: &quot;odd[ idx ] = elem &quot;
+		// where idx and elem are index of the loop and the associated array element.
+	}
+}</code></pre><p id="946193b7-768b-42d4-9c0d-f2a9f0e12157" class="">If the array is already <code>const</code>, there is no need to put the <code>const</code>, but adding it won&#x27;t be an error (it is even recommended).
+You can also add the type of the element if you want to: <code>for elem int in const odd</code>.
+For each loop, allows you to keep a counter on the number of iteration done so far.</p><pre id="97a585df-2472-47ee-8f01-38d8ddb366a0" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	container := [&quot;map&quot;: &quot;get the key and the value&quot;, &quot;array&quot;: &quot;get only the value&quot;]
+	for [key, val], idx in container do cio.Println(idx as string + &quot;: &quot; + key + &quot; -&gt; &quot; + val)
+}</code></pre><p id="7dfa363b-72bb-425e-8f32-5bb4e69976f2" class="">Here the container is a dictionary, so the for each gives <code>struct{key string, value string}</code>. By doing <code>[key, val]</code> we unwrap the structure to the filed. &quot;idx&quot;, that comes after, is the loop index.
+In that example we also see how to make one line <code>for</code> loop; with the keyword <code>do</code>.</p><p id="15c78709-8df0-43c0-a35a-bcfb4989431f" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h2 id="79da4830-a184-492c-8786-c3e3bc77829a" class="">2.3 - For-exp !</h2><p id="b348c53c-c819-4729-97f1-11dc72166cd5" class="">Like the <em>if-exp</em>, it is possible to have a <em>for-exp</em>. The <em>for-exp</em> will follow the same rules than the <em>if-exp</em> for the syntax. But the result will be an a collection according to what come after the <code>-&gt;</code>.</p><pre id="b5987053-d6f3-46a9-b334-ace433f6f3ee" class="code code-wrap"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	cio.Println(for i := 0 to 10 do -&gt; i * 2) // [2, 4, 6, ..., 20]
+	cio.Println(for i := 0 to! 10 do -&gt; cio.Get&lt;string&gt;(), i + 1)
+	// depend on the user input
+}</code></pre><p id="0741cd36-65df-4977-b378-8842fb0d5933" class="">Here, the first <em>for-exp</em> will give a static size array because the size (10 - 0) can be deduced by the compiler. If the boundary of the <code>to</code> is a variable, the array is a dynamic size one.
+It is possible to give 2 elements after the <code>-&gt;</code> and that creates a dictionary !</p><h1 id="e4dc4cea-4c32-4a94-a7f9-1a45dd52faab" class="">3 - Do while and while loop</h1><h2 id="463c43d4-161b-4bcd-b6f4-25ebdfd31d82" class="">3.1 - Do it while it&#x27;s true</h2><p id="bc022b27-95f7-4fdb-954e-c12dcd4a8798" class="">The <em>Do-while</em> loop, is a loop that will be executed at least one time, and will be repeated as much as the end condition is <code>true</code>.</p><pre id="1eb352b4-ddff-48ee-a05c-8c06f0d95860" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	do {
+		cio.Println(&quot;only once&quot;)
+	} while false
+}</code></pre><p id="6a8d643f-27c9-4020-b2ad-95869c7a81e6" class="">That example will print &quot;only once&quot; but won&#x27;t repeat. It is not possible to define scope variable, but variable defined in the scope can be used in the condition</p><pre id="54deaefc-7fc8-41bc-9312-6b5e1e7e5696" class="code"><code>package main
+
+func main() {
+	it := 0
+	do {
+		condition := it == 18
+		it++
+	} while !condition
+}</code></pre><p id="4e5c0dca-d864-491a-bcce-66adeec7612f" class="">So the result will be different weather we put <code>it++</code> before or after the <code>condition := it == 18</code>.
+The online loop for <em>do-wile</em> is like a classic <em>do-while</em> without scope and... with only one execution code.</p><p id="0c565a75-dcaf-46a6-ac15-fac76250ebbf" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h2 id="f90a823e-1e06-4198-8dda-8673103a4e77" class="">3.2 - the while loop</h2><p id="42c40675-184e-41a6-ae4b-f71a4e6f30b7" class="">The will loop is the opposite of the <em>do-while</em> loop. It must be read like: <em>while it&#x27;s true do ...
+</em>The condition will be tested before entering in the loop. Also, it is possible to define while var.</p><pre id="a4a76bde-a996-4f86-9e02-335343ca4e9a" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	while i := 0; i &lt; 10 {
+		cio.Println(i)
+		i++
+	}
+}</code></pre><p id="4b117b0d-d9f5-4223-ac28-08302d52b3c5" class="">In that example it is recommended  to use a <code>for</code> loop, but with <code>while</code> loop it is possible to make more complex conditions.
+The one line <em>while</em> loop looks like:</p><pre id="90aeb8f4-a3b9-4e28-abb5-229328f9f454" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	while msg := cio.Get&lt;string&gt;();  msg != &quot;Nu&quot; do msg = cio.Get&lt;string&gt;()
+	cio.Println(&quot;Congratulation, you&#x27;ve find the best language ever !&quot;)
+}</code></pre><p id="66f49c1e-a295-440e-944b-b3359eb58457" class=""><a href="Dictionary%20c8a10c9bfd5144f5badc155e5eb3d8d6.html">Previous Chapter</a>    |    <a href="">Top</a>    |    <a href="Data%20binding%20a25bc75853a843efb00ee0000423b91b.html">Next Chapter</a></p></div></article></body></html><script>
+	var codes = document.getElementsByTagName('code');
+	for (var i = 0; i < codes.length; i++) {
+		codes.item(i).classList.add('prettyprint', 'lang-go')
+	}
+</script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=go;skin=desert"></script>

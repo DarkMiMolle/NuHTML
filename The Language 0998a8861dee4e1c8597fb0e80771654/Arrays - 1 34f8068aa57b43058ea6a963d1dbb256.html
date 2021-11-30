@@ -1,0 +1,826 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Arrays - 1</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="34f8068a-a57b-4305-8ea6-a963d1dbb256" class="page sans"><header><h1 class="page-title">Arrays - 1</h1></header><div class="page-body"><nav id="6ee03d7e-a216-4107-8406-23e23f0f8fa8" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#30c441c3-edab-47be-a402-4184e8bb2359">1 - Static size array</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c410dd13-f454-4e9a-a97f-5f58817b91c3">1.1 - Single size array</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d08eac7f-7a8c-444a-a969-67a02e999151">1.2 - Multi-Dimention array</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8aacd214-b536-4206-bb2b-684a2697e4e7">2 - Dynamic size array</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1333b6d7-edef-4354-8633-c5e35294612b">3 - Operations on array and Slice type</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d668d802-de0d-4a76-835b-50c1ab7f6d3b">3.1 - Slice of an array</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#abd462c7-c08e-43d2-99d6-76cf91b12744">3.2 - Operation of arrays</a></div></nav><hr id="dadd4608-6c64-445a-b186-03b947aac23a"/><p id="f9a25ab5-49ed-47bc-9544-b6351bf74bdd" class="">Arrays are collection of one type store in order, with an index starting at 0. They are fundamental aspect of programming language so this is a big part.</p><h1 id="30c441c3-edab-47be-a402-4184e8bb2359" class="">1 - Static size array</h1><h2 id="c410dd13-f454-4e9a-a97f-5f58817b91c3" class="">1.1 - Single size array</h2><p id="9b076d82-f640-4cc0-a599-05f9ad09e9d5" class="">Static size array are array with a well defined size. That size can&#x27;t change.The size must be known at the compile time, but it is not mandatory.</p><pre id="88b840d9-9080-4b24-a0b1-235dfec094bd" class="code"><code>package main
+
+func main() {
+	var Array [4]string // array of 4 string
+	var Array2 []string = [&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;] // array of 4 string too !
+	// by the way: [&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;] is an RValue for static array
+	Array3 := [0, 1, 2, 3, 4, :+5] // Array3 is [10]int !
+}</code></pre><p id="7830692a-a426-410f-a19e-2eaaa6d89c52" class="">When the value isn&#x27;t set, or if the value doesn&#x27;t fully represent the size of the array, the size must be given.
+It is possible to assign an array of a shorter length, but it will reset the elements behind the short size to their default value</p><pre id="2e17becc-120c-4fe1-b3be-38b5f88b4915" class="code"><code>package main
+
+func main() {
+	var Array [4]string = [&quot;Hello&quot;, &quot;There&quot;] // ok, but Array[2] and [3] == &quot;&quot;
+}</code></pre><p id="49671b69-ad8c-4f00-a1e8-ca3c6183712e" class="">It is also possible to assign array of a larger length, but this time it will only pick the first elements of that array.</p><pre id="4c22bf8e-e001-4bf1-bb93-31ba434baf34" class="code"><code>package main
+
+func main() {
+	var Array [2]string = [&quot;Hello&quot;, &quot;There&quot;, &quot;General&quot;, &quot;Kenobi&quot;] // ok == [&quot;Hello&quot;, &quot;There&quot;]
+}</code></pre><p id="1f582c60-0209-4cd4-93bf-da205e402a0b" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h2 id="d08eac7f-7a8c-444a-a969-67a02e999151" class="">1.2 - Multi-Dimention array</h2><p id="30223b92-2c28-4244-a627-8b5f5decbf72" class="">Usually, when we want to make a multi-dimensional array, we simply make an array of array.
+With static length array, is possible to do that, but Nu also allows to make &quot;real multi-dimensional&quot; array</p><pre id="00c2b7b5-4e2f-4ee1-99cd-025285103035" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	var Matrix [5, 5]int
+	cio.Println(Matrix[2, 2])
+}</code></pre><p id="3db3e6a6-c8c4-4272-ac25-15620b0351c3" class="">Matrix is an array of 2 dimension, equivalent to <code>[5][5]int</code>, except here, we can access element like a real 2-Dimensional array and not by taping <code>Matrix[2][2]</code>.
+This is only possible because of the static size.
+It is still possible to not specify the size at the declaration</p><pre id="45cb160e-9956-4770-af1c-1210c1de6118" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	var Matrix [[][]]int = [[1, 2, 3][2, 4, 6][3, 6, 9]]
+	cio.Println(Matrix[2, 2])
+}</code></pre><p id="eed58b29-345d-4440-bba6-5d7ed0e10a69" class="">The differences between an RValue of <code>[3][3]int</code> and <code>[3, 3]int</code> is there is no &#x27;,&#x27; between value for the <code>[3, 3]int</code>.</p><pre id="9d2628df-7530-429a-857b-998ab39e0017" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	realMulti := [[1, 2, 3][2, 4, 6][3, 6, 9]] // [3, 3]int, no &#x27;,&#x27; between arrays
+	ArrArr := [[1, 2, 3], [2, 4, 6], [3, 6, 9]] // [3][3]int, &#x27;,&#x27; between arrays
+	cio.Println(Matrix[2, 2])
+}</code></pre><p id="780cd60f-c181-4dd0-b303-3c0dadd75f14" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h1 id="8aacd214-b536-4206-bb2b-684a2697e4e7" class="">2 - Dynamic size array</h1><p id="76f43766-54d9-4e53-b310-e87c4138317b" class="">With dynamic&#x27;s arrays, it is possible to append and remove element to the end of the array, during the execution, so the size isn&#x27;t known at the compile time.</p><pre id="53366206-c0bc-41d8-8ddc-5ed95c5bcfe7" class="code"><code>package main
+
+func main() {
+	var coursesList [...]struct{product string, quantity int}
+	coursesList.append(
+		{{product: &quot;chocolat&quot;, quantity: 3}}, 
+		{{product: &quot;Gameboy&quot;, quantity: 2}}
+	)
+	courseList.reduce() // reduce the list by deleting (and returning) the last value
+}</code></pre><p id="73ef0636-4a76-422c-9f29-f8e596813237" class="">The Rvalue of a dynamic size array is</p><pre id="fc24d2b6-ed1e-422d-baa8-9388acac75fb" class="code"><code>package main
+
+func main() {
+	dynArr := [1, 2, 3, ...]
+}</code></pre><p id="b463edfa-a4ae-42d9-87d7-cec013bf1745" class="">it is possible to reserve memory:</p><pre id="2e374b8c-920b-407b-aefd-2c53c0278aee" class="code"><code>package main
+
+func main() {
+	dynArr := [1, 2, 3, ... :+5]　// dynArr.length == 3 ! but its capacity is 8.
+}</code></pre><p id="aa3eb0eb-9b77-452d-9ada-e4736c4359e4" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h1 id="1333b6d7-edef-4354-8633-c5e35294612b" class="">3 - Operations on array and Slice type</h1><h2 id="d668d802-de0d-4a76-835b-50c1ab7f6d3b" class="">3.1 - Slice of an array</h2><p id="27815208-ae69-4160-b58d-cbe0f509dafe" class="">A slice is a sub-array, it represents a section of an existing array. Its type is dynamic, but can be applied on static and dynamic size array.</p><pre id="4bb063dc-5d85-45fe-b08b-9099454af0a1" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	staticArr := [1, 2, 3, 4, 5]
+	dynArr := [1, 2, 3, 4, 5, ...]
+	var slice [&amp;]int // the type representing a slice
+	slice = staticArr[0 to 2] // slice.length == 3 (from 0 to 3 (include))
+	cio.Println(slice[0]) // print 1
+	slice[0] = 42
+	cio.Println(staticArr[0]) // print 42 !!
+	slice = dynArr[2 to! 5] // slice.length == 3 (from 0 to 5 (exclude))
+	cio.Println(slice[0]) // print 3 !
+}</code></pre><p id="92e824ef-a435-4eeb-9e35-108a68b794af" class="">the <code>to</code> is inclusive, meaning <code>[0 to 2]</code> is the interval <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0, 2]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span>, where <code>to!</code> is exclusive, meaning <code>[0 to! 5]</code> is the interval <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>5</mn><mo stretchy="false">[</mo></mrow><annotation encoding="application/x-tex">[0, 5[</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">5</span><span class="mopen">[</span></span></span></span></span><span>﻿</span></span>.
+For dynamic size array, it is possible to take slice bigger than the array, it will simply append default value to it.
+The default value for a Slice is <code>nullptr</code>.</p><pre id="080f32fc-0a2f-4a54-859d-215c62c03deb" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	var arr [...]int
+	slice := arr[0 to 18]
+	cio.Println(arr.length) // print 19
+}</code></pre><p id="37579777-dab9-4799-af66-5de63ebda2a3" class="">It is possible to take slice from a slice. Even a bigger slice if the original array allows it.</p><pre id="44aec8bb-5a2d-4c31-a253-f871621d8a3d" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	var arr1 [...]int, arr2 [18]int
+	slice := arr1[0 to 18]
+	slice2 := slice[0 to 20] // append 2 element to arr1 !
+	slice = arr2[1 to 5]
+	slice2 = slice[0 to 10] // ok, take a larger slice from arr2
+	// slice2 = slice[0 to 18] will fail at runtime
+	// because the slice wanted is bigger than the arr2 which has a static size.
+}</code></pre><p id="2a742930-e13e-4928-8868-d47917ddb807" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h2 id="abd462c7-c08e-43d2-99d6-76cf91b12744" class="">3.2 - Operation of arrays</h2><p id="53ae97d4-d4e9-4b34-a290-d99a4c35c761" class="">There are more operation on array.
+<code>.length</code> to get the length of the array  <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>s</mi><mi>t</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>c</mi><mo separator="true">,</mo><mi>d</mi><mi>y</mi><mi>n</mi><mi>a</mi><mi>m</mi><mi>i</mi><mi>c</mi><mo separator="true">,</mo><mi>s</mi><mi>l</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[static, dynamic, slice]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord mathnormal">nami</span><span class="mord mathnormal">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">i</span><span class="mord mathnormal">ce</span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span>
+<strong>Warning ⛔️  </strong>with multi-dimension static array, we must specify which length we want</p><pre id="334b99de-b9e7-4084-8dbd-7ab5ac2aa00c" class="code"><code>package main
+
+func main() {
+	staticArr := [1, 2, 3]
+	multiDim := [[1, 2, 3][4, 5, 6]]
+	dynArr := [1, 2, 3, ... + 1]
+	trueVal := staticArr.length == 3 // staticArr.length is a constexpr !
+
+	trueVal = multiDim.length[0] == 6 // [0] == full size (constexpr)
+	trueVal = multiDim.length[1] = 2 // [1] == 1st dimension (constexpr)
+	trueVal = mutliDim.length[2] = 3 // [2] == 2nd dimenstion (constexpr)
+	// etc for all dimensions
+
+	trueVal = dynArr.length == 3 // not constexpr
+	dynArr.append(4)
+	trueVal = dynArr.length == 4 // that&#x27;s why it&#x27;s not constexpr
+	// actually .length is constexpr for [...]T if the whole value is constexpr
+	const! arr = [1, 2, 3, ...]
+	// arr.append is not possible
+	// arr.length is constexpr...
+}</code></pre><hr id="eed6475e-8d07-4111-afed-29bf81834e1e"/><p id="554211c9-5e2c-48d3-9e84-fe12825e2860" class="">The <code>+</code> operator will return a new array with element from left and right (so with a new size).
+It is possible to mixte dynamic and static size array, but in that case the result will be a dynamic size array.
+dynamic size array also have the <code>+=</code> operator that will increase their size.
+
+<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>s</mi><mi>t</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>c</mi><mo separator="true">,</mo><mi>d</mi><mi>y</mi><mi>n</mi><mi>a</mi><mi>m</mi><mi>i</mi><mi>c</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[static, dynamic]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord mathnormal">nami</span><span class="mord mathnormal">c</span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span></p><hr id="9458668f-d890-41c3-a50c-2970b793ccb2"/><p id="ab5f82b1-759e-4663-9964-9da44809cf50" class=""><code>.fill</code> to fill the content of the array of a certain value  <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>s</mi><mi>t</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>c</mi><mo separator="true">,</mo><mi>d</mi><mi>y</mi><mi>n</mi><mi>a</mi><mi>m</mi><mi>i</mi><mi>c</mi><mo separator="true">,</mo><mi>s</mi><mi>l</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[static, dynamic, slice]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord mathnormal">nami</span><span class="mord mathnormal">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">i</span><span class="mord mathnormal">ce</span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span></p><pre id="c2115f2f-47ed-4009-8c29-689424f9a767" class="code"><code>package main
+
+func main() {
+	var just42 [42]int
+	just42.fill(42)
+	var dyn42 [...]string
+	dyn42.fill(42, &quot;42&quot;)
+	var notJust42 [42]float
+	noJust42[5 to! 42].fill(42) // slice from 5 to 41 (include)
+}</code></pre><p id="6176e69f-972d-4d9b-9b72-d537f1bcbe5e" class="">if there is only one element given to <code>fill</code>, it must be of the same type than array&#x27;s elements.
+It is possible to give an integer before the value, that represent the number of value to set (starting at 0). For static size array it will fail if the number is bigger than its length; for dynamic array it will append the number wanted.
+It is possible to fill only from a certain index, to do so, simply use the slices.</p><hr id="1c02757a-45ae-468b-86af-e94a99858f04"/><p id="b79a0ff2-81a1-4a75-b318-22da965f0a79" class=""><code>.reverse</code> is a particular slice of the array which is reversed <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>s</mi><mi>t</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>c</mi><mo separator="true">,</mo><mi>d</mi><mi>y</mi><mi>n</mi><mi>a</mi><mi>m</mi><mi>i</mi><mi>c</mi><mo separator="true">,</mo><mi>s</mi><mi>l</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[static, dynamic, slice]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord mathnormal">nami</span><span class="mord mathnormal">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">i</span><span class="mord mathnormal">ce</span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span></p><pre id="1a02b001-e014-4a1b-9655-9d413a10bb8d" class="code"><code>package main
+
+func main() {
+	arr := [1, 2, 3, 4, 5]
+	arr.reverse[0] = 25 // arr[4] == 25
+}</code></pre><p id="5903d838-2b59-4f2d-93f3-4d6ac7e88752" class=""><em>its type is Std core.array.ReversedSlice</em></p><hr id="04eb4386-0072-46a9-b258-3bac3ffda327"/><p id="3d72d0d1-fd56-4bbf-bfde-9c572f7d7d7c" class=""><code>.append(T)/.reduce()</code> are method to append to the list or to reduce the list. It append/reduce to the end of the array. <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>d</mi><mi>y</mi><mi>n</mi><mi>a</mi><mi>m</mi><mi>i</mi><mi>c</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[dynamic]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord mathnormal">nami</span><span class="mord mathnormal">c</span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span></p><hr id="997cfa16-995e-4a57-9a85-5fb141153b82"/><p id="864ecf0d-5817-4312-af76-49f0b9763042" class=""><code>.first/.last *T</code> are <em>pointer</em> (we&#x27;ll see that later) to the first/last element of the array <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>s</mi><mi>t</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>c</mi><mo separator="true">,</mo><mi>d</mi><mi>y</mi><mi>n</mi><mi>a</mi><mi>m</mi><mi>i</mi><mi>c</mi><mo separator="true">,</mo><mi>s</mi><mi>l</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[static, dynamic, slice]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord mathnormal">nami</span><span class="mord mathnormal">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">i</span><span class="mord mathnormal">ce</span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span></p><pre id="83c95cd5-775c-4f1d-8d21-8e408942c637" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	arr := [&quot;Anakin&quot;, &quot;Darth Vador&quot;]
+	cio.Println(arr.first, arr.last, separator: &quot;, &quot;) // print Anakin, Darth Vador
+}</code></pre><hr id="1d67aea2-52f0-4f8e-9bd4-d1ca84f1192d"/><p id="c2540071-e893-4162-9d0e-a07a55742682" class=""><code>.begin/.end/at(i int)</code> are iterator accessor. They return an iterator of type: Std core.array.<em>Iterator. </em><em><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mi>s</mi><mi>t</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>c</mi><mo separator="true">,</mo><mi>d</mi><mi>y</mi><mi>n</mi><mi>a</mi><mi>m</mi><mi>i</mi><mi>c</mi><mo separator="true">,</mo><mi>s</mi><mi>l</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[static, dynamic, slice]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord mathnormal">nami</span><span class="mord mathnormal">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">i</span><span class="mord mathnormal">ce</span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span></em></p><pre id="9f5928a8-eab0-4dba-a426-c958ad6efd50" class="code"><code>package main
+
+import Std io.console as cio
+
+func main() {
+	arr := [2, 4, 6, 8, 9, 13, 14]
+	it := arr.begin // it.value == 2, it.index == 0
+	it = arr.at(4)  // it.value == 9, it.index == 4
+	it -&gt; 10        // it.value now == 10, it.index == 4
+	it = it.next    // it.value == 13, it.index == 5
+	it -&gt; 14        // it.value now == 14, it.index == 5
+}</code></pre><p id="ca7ffb6d-9d63-4ca7-9c9b-ef84aa4b0ad0" class="">An iterator (for array) has the methods/getter:</p><p id="9baf127e-7387-4cd6-a24d-70203f8631c8" class=""><code>.value *T</code> a pointer to the value of the array
+<code>.index int</code> the index of the value
+<code>.next/prev Std::core.array.Iterator&lt;T&gt;</code> the iterator corresponding to the next/prev value (meaning the next/prev index in the array)
+The operator <code> (self -&gt; T) void </code> that change the value hold by the iterator
+The operator <code> ( &amp;self ) *T </code> that get the address of the value hold by the iterator
+
+we&#x27;ll see more of iterator later.</p><hr id="0077d57d-61bd-43ce-b2f2-a54d5d8b89b3"/><p id="30ba137f-d67a-4213-8c47-040377248fa2" class="">all those operation are <em>read-only</em> (they are in <code>get</code>).</p><p id="e17895dc-3f92-4e18-8977-b5b9c01ff181" class=""><a href="Structures%20-%201%20a93812b68bf7407089021d4e96322a8e.html">Previous Chapter</a>    |    <a href="">Top</a>     |    <a href="Dictionary%20c8a10c9bfd5144f5badc155e5eb3d8d6.html">Next Chapter</a></p><p id="566eaca0-2f51-4776-9bd7-724150b59abe" class="">slice also have:
+.SubArrayType Type to have information about the current type they hold;
+.OffsetValue int: self ≥ 0 to know what is the offset;
+.OriginalArray *typeof(Type) to have the reference of the current array</p><p id="a94813ae-d82d-4db4-a2bb-fc0a64d46304" class="">
+</p></div></article></body></html><script>
+	var codes = document.getElementsByTagName('code');
+	for (var i = 0; i < codes.length; i++) {
+		codes.item(i).classList.add('prettyprint', 'lang-go')
+	}
+</script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=go;skin=desert"></script>

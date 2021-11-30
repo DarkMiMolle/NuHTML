@@ -1,0 +1,869 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Functions &amp; copy</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="522d9b67-57d2-4899-84c5-c2ff59f9fd39" class="page sans"><header><h1 class="page-title">Functions &amp; copy</h1></header><div class="page-body"><nav id="84b495a5-53ce-480f-bd6a-8eab4ec6da32" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7de26703-2815-419f-96bb-a31bb5e5ad2e">1 - Deep copy or not</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e7d37c15-bfe4-4b26-a852-772f83bf3466">1.1. how it works</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#fe143073-d2aa-4379-af3a-02fe49266379">1.2 Pointers without references ?</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#29366d73-eb39-4944-963a-8e78af637b8c">1.3. Force the deep copy everywhere ?</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#997e1b98-92dd-40b4-9d6a-6811e69a4d80">2 - Variadic number of argument...</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5961b0fb-7dc4-4b9b-bd6a-534f592ccc91">2.1 What is it ?</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#287c7d5f-5cbb-4bdb-8d44-7ce3aab58f71">2.1.1 Definiton</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#89057da0-9aa7-4527-98e7-65c8421b87a9">2.1.2 Call a function with variadic argument ?</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f32d4e32-81c4-46a4-8cfd-2b11e923598c">2.1.2 inside the function</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#59f43995-229d-44b5-8e68-8f8eb930a0dc">2.2 Variadic argument with argument binding</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#617db006-5725-452c-ac08-d5606bb79cf5">3 - Contract on your function !</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#dba62725-7137-41e0-9a38-c6061c6cc436">4 - defer the execution</a></div></nav><h1 id="7de26703-2815-419f-96bb-a31bb5e5ad2e" class="">1 - Deep copy or not</h1><h2 id="e7d37c15-bfe4-4b26-a852-772f83bf3466" class="">1.1. how it works</h2><p id="d27d0b9c-bbc1-49f1-abfa-0ccdd491f362" class="">If anyone reaches that chapter, it must understand correctly the principle of pointer and functions. When we use a function in programming languages there are questions we are asking on arguments. Is it passed <strong>by value</strong>, meaning it makes a <strong>copy</strong>, <strong>by reference</strong> meaning we must be able to manually make the <strong>copy</strong>, by name, etc.
+In <em>Nu</em> we passe argument by copy. But how exactly ?
+
+If we have a structure:
+<code>struct type Cpy = { val1 int, val2 string }</code>
+and a function:
+<code>func f(cpy Cpy, ref *Cpy) { ref = cpy }</code> 
+
+Then the <em>cpy</em> argument will be created with all data of the existing in the value we give it (of course if we create the value in place it won&#x27;t make a copy of it). Where <em>ref</em> which is a pointer will juste give the address. That behaviour ensure the function won&#x27;t change the data given to <em>cpy</em>, but it may change the data of <em>ref</em> since it is a pointer. <em>cpy</em> is a value-arg where <em>ref</em> is a ref-arg
+
+But what happen if the structure has a pointer in attribute ?
+<code>struct type CpyPtr = { val1 *int, val2 string }</code> 
+It start being complicated. In that case for a value-argument it will still copy all the data of the value. And then the copy will have the <em>val1</em> pointer equal to the original value. So changing the value of <em>copy.val1</em> will change the value of <em>value.val1</em> (yes, it&#x27;s pointer, both represent the same memory case). That may be what is wanted, but it sometimes we don&#x27;t want that to happen.
+
+Let&#x27;s see code to resume:</p><pre id="d7f42d25-e353-4894-aa2e-b91205673777" class="code code-wrap"><code>package main
+
+import Std io.console as cio
+
+struct type CpyPtr = {
+	ptr *int = new 42
+	val int = 42
+}
+
+func f(cpy CpyPtr, val int, ref *int) {
+	if cpy.ptr != nullptr then cpy.ptr = 18 // changing the value at the address of cpy.ptr.
+	cpy = CpyPtr{} // cpy is passed by value, it won&#x27;t anything for the base value
+	val = 103 // same, it&#x27;s a copy
+	ref++ // ref is pointer, so the value will change out of the function.
+}
+
+func main() {
+	cpy := CpyPtr{}
+	cio.Println(cpy) // CpyPtr{ptr: &amp;42, val: 42}
+	val := 42
+	
+	f(cpy, val, &amp;val)
+	cio.Println(cpy) // CpyPtr{ptr: &amp;18, val: 42}
+	cio.Println(val) // 43
+	// we change the value at the address cpy.ptr, so now it is equal to 18
+	// val = 103 was assigned to another variable, so nothing change
+	// ref was the value at the address of val, so ref++ &lt;=&gt; val++ --&gt; val = 43
+}</code></pre><h2 id="fe143073-d2aa-4379-af3a-02fe49266379" class="">1.2 Pointers without references ?</h2><p id="5e7e54f4-0c68-4310-bdbf-2d0947fb7b4d" class="">Sometime we want the pointer in the structured data to be passed by copy instead of reference. So we can change the value of the attribut without changing the value of the data out of the function. To do so we must create a new pointer with the same values. That behaviour is called a <strong>deep copy</strong>. It may be very much more costly if there are pointers pointing to pointer, etc...
+To make a deep copy in <em>Nu</em> we simply add <code>const</code> before the variable we want to give. It is only possible to add <code>const</code> to structured type (like <code>struct</code> or <code>interface</code>)
+</p><pre id="c188387a-7d59-4173-bb9e-e65b373ff0b7" class="code code-wrap"><code>package main
+
+import Std io.console as cio
+
+struct type CpyPtr = {
+	ptr *int = new 42
+	val int = 42
+}
+
+func f(cpy CpyPtr, val int, ref *int) {
+	if cpy.ptr != nullptr then cpy.ptr = 18 // changing the value at the address of cpy.ptr, if we use deep copy, the address is freshly created !
+	cpy = CpyPtr{} // cpy is passed by value, it won&#x27;t anything for the base value
+	val = 103 // same, it&#x27;s a copy
+	ref++ // ref is pointer, so the value will change out of the function.
+}
+
+func main() {
+	cpy := CpyPtr{}
+	cio.Println(cpy) // CpyPtr{ptr: &amp;42, val: 42}
+	val := 42
+	
+	f(const cpy, val, &amp;val) // cpy will be deeply copy so the value in cpy.ptr won&#x27;t change !
+	cio.Println(cpy) // CpyPtr{ptr: &amp;42, val: 42}
+	cio.Println(val) // 43
+	// we change the value at the address cpy.ptr, so now it is equal to 18
+	// val = 103 was assigned to another variable, so nothing change
+	// ref was the value at the address of val, so ref++ &lt;=&gt; val++ --&gt; val = 43
+}</code></pre><p id="53205105-85d2-4aeb-a89d-6ac80ce0b47e" class="">In that example it&#x27;s like if at the beginning of the function f we&#x27;ve write: <code>cpy.ptr = new cpy.ptr</code>.
+This works very well on function, but that issue can be found juste with assignments ! Actually function arguments are really similar to assigning a value to them.</p><h2 id="29366d73-eb39-4944-963a-8e78af637b8c" class="">1.3. Force the deep copy everywhere ?</h2><p id="a7c8cebd-5af6-4bce-895a-7aeac6612d60" class="">There are some case, where we know we only expect deep copy. It is only a deep copy with constants for example. But how <em>Nu</em> does to let the user say he only want deep-copy ?
+It is only possible in <code>struct</code> (and <em><code>class</code></em>), in the <code>operators</code> block.
+<code>operators { const (=) }</code>, the <code>const (=)</code> will indicates a copy/assignment will only be a deep-copy so it is not needed to add <code>const</code>. It won&#x27;t be an error to add it tho.</p><h1 id="997e1b98-92dd-40b4-9d6a-6811e69a4d80" class="">2 - Variadic number of argument...</h1><p id="7cc7522c-8bd1-4c71-97c1-6336ddf01cd3" class="">We now know how to make a proper deep-copy, let&#x27;s talk of something related with arguments.
+The variadic argument... What is that ?</p><h2 id="5961b0fb-7dc4-4b9b-bd6a-534f592ccc91" class="">2.1 What is it ?</h2><p id="ebdfee7a-b485-411e-8cb3-275f0f80d853" class="">The principe of variadic argument is really simple to understand. It is the possibility for function to have unlimited (power ? no, but) arguments. Unlimited being possibly 0.
+This can make problems with the argument binding, but don&#x27;t worry, Nu has solution for everyone.</p><h3 id="287c7d5f-5cbb-4bdb-8d44-7ce3aab58f71" class="">2.1.1 Definiton</h3><p id="340baed8-8a36-470d-9d03-46ff64af63a0" class="">To define variadic argument in a function there is some rules. First all argument that comes after a variadic argument must have default value. Then a function can have only one variadic argument.
+Now to define variadic argument, we need to put the name used to represent the argument followed by <em>...</em>, and the type, example: <code>func f(args... int)</code> will be a function that can take 0 or more <code>int</code>.
+We could except more than one type, in that case we can use: <code>auto</code>: <code>func f(args... auto)</code>, or <code>any</code> even if it is better to use <code>auto</code> (<code>any</code> is rarely the best option).
+In the part right after we&#x27;ll see how to apply constraint to argument so the can better match a defined behavior.
+But for now let&#x27;s see:</p><h3 id="89057da0-9aa7-4527-98e7-65c8421b87a9" class="">2.1.2 Call a function with variadic argument ?</h3><p id="9729da57-1429-46fc-83d2-3965e20ebfaa" class="">To call a function with variadic argument, it is extremely simple. We simply put the value juste like if the function didn&#x27;t have variadic argument: <code>func f(args... auto)</code> → <code>f(18, &quot;hello&quot;, &amp;a)</code>.</p><p id="d5860418-d3cc-422d-a23c-45bbfeac051d" class="">
+</p><h3 id="f32d4e32-81c4-46a4-8cfd-2b11e923598c" class="">2.1.2 inside the function</h3><p id="6e428dc3-7c32-4f57-8b40-b09dd7834c34" class="">Inside the function, the variadic argument is actually represented like a dynamic size array.
+
+Let see an example of all those point so fare:</p><pre id="a48bd84e-784a-4b22-a73e-638d1565b6dd" class="code code-wrap"><code>package main
+
+import Std io.console as cio
+
+func f(args... auto) {
+	for elem, idx in args {
+		cio.Printf(&quot;The %{int}th type is: %{string} with value: %{auto}\n&quot;, idx, typeof(elem).Name, elem)
+	}
+}
+
+func main() {
+	f(18, &quot;Hello there !!&quot;, 42, true, &quot;General Kenobi&quot;)
+}</code></pre><h2 id="59f43995-229d-44b5-8e68-8f8eb930a0dc" class="">2.2 Variadic argument with argument binding</h2><p id="af6fe399-da58-498c-97c7-fa7c8e822c8b" class="">It is possible to <em>bind arguments</em> with arrays, map or public attribut of a structure. But would it work with variadic argument ?
+With order binding, nothing change. We can however add a &#x27;,&#x27; after the <code>...</code> to fill the data that comes after the variadic argument. If there is argument before the variadic argument, it is still possible to juste use the <code>...</code>, it will fill the classic argument and if there is argument left, it will fill the variadic arguments.
+For the <em>name binding</em>, the name of the variadic argument must be set, and the associated value must be an array.</p><pre id="c855c7ac-3eff-4965-b0d8-38dc6b8d0a97" class="code code-wrap"><code>package main
+
+import {
+	Std System.Constants as sconst
+	Std System.io as sio
+	Std Strings as Str
+}
+
+func f(msg string, args... auto, bool nl = false) {
+	types := Str.Regex.FindSequences(msg, &quot;&quot;&quot;%\{[a-zA-Z0-9]*\}&quot;&quot;&quot;)
+	var actual_msg string
+	if types.length == 0 then actual_msg = msg
+	else {
+		var pos, prev_pos Str.SIndex
+		for [typename, pos], idx in types {
+			actual_msg += Str.SubString(msg, prev_pos, pos)
+			arg_t := typeof(args[idx])
+
+			if &quot;%{&quot; + arg_t.Name + &quot;}&quot; == typename 
+				|| arg_t.Kind == &quot;struct&quot; &amp;&amp; typename == &quot;%{struct}&quot; 
+				|| arg_t.Kind == &quot;interface&quot; &amp;&amp; typename == &quot;%{interface}&quot;
+			then
+				actual_msg += arg_t.DescriptionOf(args[idx])
+
+			else throw Error{&quot;Incorrect value&quot;}
+			
+			prev_pos = pos
+		}
+		actual_msg += Str.SubString(msg, pos)
+	}
+	
+if nl then actual_msg += sconst.NewLine
+
+sio.Write(sconst.Stdout_fid, actual_msg)
+if nl then sio.Flush()
+}
+
+func main() {
+	elem := [18, &quot;salut&quot;, {{val: 42, kind: &quot;[]auto ?&quot;}}]
+	msg := &quot;args are: %{int}, %{string}, %{struct}&quot;
+	{
+		elem2 := ([msg] as []auto).append(elem...)
+		f(elem2...) // ok
+		f(elem2..., true) // ok
+		f(msg, elem..., true) // ok
+		f(msg, 18, &quot;salut&quot;, {{val: 42, kind: &quot;[]auto ?&quot;}}) // ok, not possible to set nl to true like that !
+		// to do it it is possible by doing on of the ones above like:
+		f(msg, [18, &quot;salut&quot;, {{val: 42, kind: &quot;[]auto ?&quot;}}]..., true)
+	}
+	{
+		elem2 := {{msg: msg, args: elem}}
+		elem3 := {{msg: msg, args: elem, nl: true}}
+
+		f({elem2}...)
+		f({elem2}..., true)
+		f({elem3}...)
+	}
+}</code></pre><h1 id="617db006-5725-452c-ac08-d5606bb79cf5" class="">3 - Contract on your function !</h1><p id="1d188432-3877-4e8e-bf39-787caf47f3dc" class="">We already talk about contract when we defined new basics type. It allows to add constraint to the type
+R<em>eminder: </em><code><em>type positive = int: self &gt; 0 with default = 0</em></code><em> define a new type named positive that can&#x27;t be less nor equal to 0</em>.
+
+Functions are not type, so it is not the same syntaxe. To define contacts to a function/method in <strong>Nu</strong> we add <code>with :</code> after the return type or the definition and put the contracts in a scope.
+In the contract scope global variable, argument and return value are accessible. However they are not as is. To access those variable (so excepting <code>.return</code>) data we must add <code>.in</code> or <code>.out</code> whether we refer the value before the function call or after.
+If there is no <code>.out</code> or <code>.return</code> in an expression it is a <em>Pre-condition</em> meaning it will be tested <strong>before</strong> going to the function, else it will be a <em>Post-condition</em> meaning it will be tested <strong>after</strong> the function call. Using the <code>.out</code> on a non pointer argument will generate a warning of level 1</p><pre id="983d1448-c534-494d-a2bb-39596e2c12ae" class="code code-wrap"><code>package main
+
+import Std io.console as cio
+
+var func_call string
+
+func function(input *int, data struct{val int}, args... auto) auto {
+	input = data.val
+	for arg in args do cio.Println(arg)
+} with :{
+	
+	args.in.length &gt; 0 // no .out/.return -&gt; pre cond
+	for t in args.in do -&gt; !typeof(t).IsPointer
+	input.in &gt; 0 // no .out/.return -&gt; pre cond
+	func_call.in == &quot;Sqrt&quot; // no .out/.return -&gt; pre cond
+	
+	data.val.in == input.out
+	input.in &lt; input.out // .out ! -&gt; post
+// &lt;=&gt; data.val.in &gt; input.in
+	typeof(.return).HasImplicitCastTo(int) // .return ! -&gt; post
+}
+</code></pre><h1 id="dba62725-7137-41e0-9a38-c6061c6cc436" class="">4 - defer the execution</h1><p id="8ebb045e-aa73-4c4f-b3d8-28c7f270fd06" class="">Sometimes we want action to be done before leaving a function, that may be to respect a contract or simply a thing to do at the end.
+With the <code>defer</code> instruction it is possible to make it.
+<code>defer</code> is a statement that take a function of type: <code>func()void</code> and apply that function at the end of the function. If there are multiple <code>defer</code> they will be call in order.
+To make the thing easier, <em>Nu</em> have a special syntax to <code>defer</code> lambda function that capture the current scope by reference. It is simple, simply open a new scope.</p><pre id="f2981c77-0e72-4615-9b2f-005ba3f3c54a" class="code code-wrap"><code>package main
+
+import {
+	Std os
+	Std io.file as _
+	Std io.console as cio
+}
+
+func print_file(path Path) {
+	file := Open(path, OpenMode.READ)
+	
+	while !file.EoF {
+		cio.Println(file.CurrentLine)
+		file.NextLine()
+	}
+
+	defer {
+		file.close()
+	}
+	defer func() =&gt; cio.Println(path + &quot; file is close&quot;)
+	// &lt;=&gt; defer { cio.Println(path + &quot; file is close&quot;) }
+}
+
+func main() {
+	print_file(os.GetCurrentPath().Join(&quot;main.nu&quot;))
+}</code></pre></div></article></body></html><script>
+	var codes = document.getElementsByTagName('code');
+	for (var i = 0; i < codes.length; i++) {
+		codes.item(i).classList.add('prettyprint', 'lang-go')
+	}
+</script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=go;skin=desert"></script>

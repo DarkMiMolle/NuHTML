@@ -1,0 +1,844 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Structures - 1</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(145, 145, 142, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(187, 132, 108, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(215, 129, 58, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 148, 51, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(108, 155, 125, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(91, 151, 189, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(167, 130, 195, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(205, 116, 159, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(225, 111, 100, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a93812b6-8bf7-4070-8902-1d4e96322a8e" class="page sans"><header><h1 class="page-title">Structures - 1</h1></header><div class="page-body"><nav id="f88eca86-0bd9-4059-a4f3-684e1163770a" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7375c35c-0690-4230-a3e4-f288b62512d5">1 - Named Structure</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ca12a13f-dcbb-4ffa-bc74-cf0f0de91e23">1.1 - Base usage</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#42e977f7-01be-43a2-aad6-e708ea4aacdb">1.2 - init, get, static</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#93f9de7f-ca19-412d-9fce-ccf195009bfc">1.2.1 - init and delete</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#02639857-0f96-4a6b-a034-030d380984fa">1.2.2 - the get attributes</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#22f422fa-d860-4bc3-a244-e9b51c23ab00">1.2.3 - static member</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#795f2a64-12fa-4393-a3a1-f4d8f3dfbf7f">2 - Lambda Structure</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#254ed5f6-db8d-4452-9ab5-cbf4e9c23771">2.1 - Lambda structure type</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#56a9aac6-acbd-4c3d-a054-dc265423c561">2.2 - Lambda structure value</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7a63e21d-3c5f-40c4-9521-1a24817dabcd">2.3 - Lambda structure quickly</a></div></nav><h1 id="7375c35c-0690-4230-a3e4-f288b62512d5" class="">1 - Named Structure</h1><h2 id="ca12a13f-dcbb-4ffa-bc74-cf0f0de91e23" class="">1.1 - Base usage</h2><p id="cdc18cdb-84de-4e1a-9814-b2c7f67c81a3" class="">A structure is a group of variable that represents data. It is a user define custom type, defined with the keyword <code>struct</code> in <code>package</code>s, <code>namespace</code>s, <code>class</code>es, or <code>func</code>tion . It is composed of <em>attribute</em>; variables for structured type. As structure can&#x27;t implement <em>methods</em>; function for structured type, it is not needed to add the keyword <code>var</code>, but the declaration of the attributes follow the same rule than variable declared with <code>var</code>.</p><pre id="de744026-ab14-4a18-8c02-e6ab9837cc5b" class="code"><code>package main
+
+struct type Position = {
+	x, y int
+}
+
+func main() {
+	var p Position
+	p = Position{x: 18, y: 42}
+	p2 = Position{}
+}</code></pre><p id="aa9a21c2-d95f-4df8-bfc3-9b71e216bc38" class="">&quot;Position&quot; is a new type with the attribute &quot;x&quot; and &quot;y&quot; of type <code>int</code>.
+There is automatically 3 way to declare a value of a named structure. The first is by setting all attribute by name (<code>Position{x: 18, y: 42}</code>), or simply in order (<code>Position{31, 99}</code>), but it&#x27;s not possible to mix them. The second option is with the <code>var</code> variable declaration, which will basically set the same value than the third way; by calling the default constructor (<code>Position{}</code>).</p><p id="4536945b-3b49-45d6-9116-dabf1d8e1b09" class="">It is possible to assign default value to the attributes, in such case the default constructor will set those value but will let the variable equal to <code>default</code>. So it is for the attributes !
+</p><pre id="465b0838-5f0e-4917-9bc1-50cebc497b62" class="code"><code>package main
+
+struct type Position = {
+	x int
+	y = 42 // deduced as int
+}
+
+func main() {
+	var p Position
+	trueExp := p == default // true
+	trueExp = p.x == default &amp;&amp; p.x == 0 // true
+	trueExp = p.y == default &amp;&amp; p.y == 42 // true
+}</code></pre><p id="608c78a1-9860-4850-ad6c-686b2b779fe9" class="">To access an element of a structured type, we pass through the accessor &#x27;.&#x27;</p><p id="d401fd25-f4ef-4098-88b0-64e67b0703cc" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h2 id="42e977f7-01be-43a2-aad6-e708ea4aacdb" class="">1.2 - init, get, static</h2><h3 id="93f9de7f-ca19-412d-9fce-ccf195009bfc" class="">1.2.1 - init and delete</h3><p id="bc17c67b-fce7-4924-a411-43f418e4763a" class="">It is possible to make constructors. A constructor is use to initialize the <em>object</em> (an <em>object</em> is a instance of a structured type). As saw in 1.1, there are 2 constructor by default. The empty one, and the the one whom set the value by name. It is possible to change the behavior of those constructor, and even to add constructor.
+A constructor is represented with the keyword <code>init</code> followed by the value it must take.</p><pre id="db67e9a6-b8ca-4cf2-aab0-eef87a991359" class="code"><code>package main
+
+import Std io.console as cio
+
+struct type Contry = {
+	name string
+	lang string
+	init() = default
+	init(name, lang string) = default
+	init(name string) = default {
+		.lang = &quot;english&quot; // to refere attribute while inside the structured type, 
+											// mark &quot;self.ATTRIBUTE&quot; or simply &quot;.ATTRIBUTE&quot;
+	}
+	init(language int) {
+		.lang = language as string
+	}
+}
+
+func main() {
+	England := Contry{&quot;England&quot;}
+	cio.Println(England.lang) // print &quot;english&quot; on the console
+}
+</code></pre><p id="f1833020-b24d-47d3-b256-f81e005e072b" class="">Here we define new constructors whom take only one element. We add the existing constructor, but it is not mandatory. We can see the <code>= default</code> after constructors, it is possible to let <em>nu-cmd</em> fill the structure with constructors that takes parameter of the same name and type than the structured type attribute. It is still possible to complete it with code inside a scope (<code>{}</code>); that the case for <code>init(name string)</code>. The <code>init(language int)</code> can&#x27;t be <code>default</code> because its parameter(s) don&#x27;t match any attribute.
+The prototype of a constructor must be unique, it means it is not possible to have 2 constructor that take the same parameters type list.
+With structure it is also possible to use the typed rvalue ! But unlike simple type, it must be define. A rvalue constructor must take only one parameter and is represented with a &#x27;!&#x27; after the <code>init</code>.</p><pre id="1e881489-7ab2-4bbd-b68a-aa0d1866ff6a" class="code"><code>package main
+
+import Std io.console as cio
+
+struct type Contry = {
+	name string
+	lang string
+	init() = default
+	init(name, lang string) = default
+	init!(name string) = default {
+		.lang = &quot;english&quot;
+	}
+}
+
+func main() {
+	contry := &quot;England&quot; Contry // possible due to the &#x27;init!&#x27;
+	cio.Println(contry.lang) // print &quot;english&quot; on the consle
+}</code></pre><p id="fc440023-c515-46fa-9269-cad74214cc9d" class="">it is still possible to use that constructor without RValue in the classic way.
+The opposite of the <code>init</code> is the <code>delete</code>. It can appear only ones in a structured type, and it is call when the object is deleting.</p><pre id="fa4421dc-608e-4cb6-ac38-80ad67311b9d" class="code"><code>package main
+
+import Std io.console as cio
+
+var expression_number = 0
+
+struct type Expression = {
+	typename string = &quot;void&quot;
+	init() = default {
+		expression_number++
+	}
+	init(typename string) = default {
+		expression_number++
+	}
+
+	delete {
+		expression_number--
+	}
+}
+
+func main() {
+	var exp1 = Expression{&quot;int&quot;}
+	cio.Println(expression_number) // print 1 on the console
+	{
+		exp2 := Expression{}
+		cio.Println(expression_number) // print 2 on the console
+	}
+	cio.Println(expression_number) // print 1 on the console
+}</code></pre><p id="25b7265c-98c6-4678-a139-2ac546087557" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h3 id="02639857-0f96-4a6b-a034-030d380984fa" class="">1.2.2 - the get attributes</h3><p id="aebcd90c-14c0-4191-bd0b-5daec8b8a411" class="">Attributes are accessible from out of the structure, however, it is possible to define attributes that will be in a read only mode. Its the <code>get</code> attributes.
+Get attributes can&#x27;t be modify out of the structure, it will take all its sense with the chapter of Extensions and Interfaces.
+Here how we define <code>get</code> attributes:</p><pre id="f0790c3f-2a49-40d5-922a-65f6d9dc40ba" class="code"><code>package main
+
+var instances = 0
+
+struct type Sample = {
+	get id int
+	name string
+	init() {
+		.id = instances++
+	}
+	init(name string) = default {
+		.id = instance++
+	}
+	delete {
+		instance--
+	}
+}
+
+func main() {}</code></pre><p id="95a8a38f-0117-4cd4-9acc-3308a48087e8" class="">Here, everybody can access the attribute <em>id</em>, but it&#x27;s only when we are in the structure that we can also modify it.</p><p id="08d25672-7691-4fc9-a21e-f426061d3223" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h3 id="22f422fa-d860-4bc3-a244-e9b51c23ab00" class="">1.2.3 - static member</h3><p id="4962c05c-839e-4ebc-aa2a-a71ddf2ce765" class="">Static element of a type is an element whom is bind to the type, and not to an instance.</p><pre id="5562f17c-8f8a-4070-beff-c53356f04171" class="code code-wrap"><code>package main
+
+import Std io.console as cio
+
+struct type Human = {
+	static get number = 0
+	name string
+	age int
+	static init {
+		.number++
+	}
+	delete {
+		.number--
+	}
+}
+
+func main() {
+	var h Humain
+	{
+		h2 := Humain{name: &quot;toto&quot;, age: 42}
+		cio.Println(Humain.number) // 2
+	}
+	cio.Println(Humain.number) // 1
+}</code></pre><p id="2f712a54-da62-42c9-b908-3f12569b881d" class="">&quot;number&quot; is a <code>static</code> attribute, to call it we mark the type (Humain) dot the attribute. As it is marked as <code>get</code> it is readable but not writable from out of the structure.
+We use &quot;number&quot; in the <code>delete</code>, because all static element are usable inside the structured type.
+But we also see <code>static init</code>. <code>static init</code> is something call before all constructor. There is only one and it can access only <code>static</code> elements, so impossible to have <code>.name</code> in the <code>static init</code> here.</p><p id="3be6ef79-e69b-49b9-8e19-f5697da3f0dd" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h1 id="795f2a64-12fa-4393-a3a1-f4d8f3dfbf7f" class="">2 - Lambda Structure</h1><p id="5803365a-d64c-4843-8379-90ece29c7a2c" class="">
+</p><p id="b2da2e74-aa16-4dbc-a622-821ef897687a" class="">Lambda structure are lambda without name that can be define everywhere. However, it is not possible to define constructor, destructor, static element not get attributes.</p><h2 id="254ed5f6-db8d-4452-9ab5-cbf4e9c23771" class="">2.1 - Lambda structure type</h2><pre id="823a6938-66bf-4f1b-bddc-94a4c6683e53" class="code"><code>package main
+
+func main() {
+	var someData struct{id int, name string}
+}</code></pre><p id="85ac31c6-5172-46f0-894d-28d562fec1cb" class="">A lambda structure is identified by its attributes name and type, but not regarding its location, that means, two variable can have the same lambda structure type even if they are not at the same location.</p><pre id="4013a1b3-a0f3-42ea-8b41-94a2c8f29aa9" class="code"><code>package main
+
+func A() {
+	var LambdaA struct{_ int}
+}
+
+func main() {
+	var LambdaB struct{_ int}
+}</code></pre><p id="41c0bc29-bcb0-4104-974f-af8ae9d36c24" class="">the structure in the function A is the same type than the structure of the function main. Therefore, it is possible to assign one to another.
+By the way, we see that it is possible to define unnamed attribute(s).
+To access those attributes, we must use the accessor operator followed by the number of the attribute.</p><pre id="ca911bf1-55ce-4461-ada1-add8684d95a9" class="code"><code>package main
+
+func main() {
+	var sample struct{_, _ int}
+	sample.1 = sample.2 // the second attribut is assigned to the first one
+}</code></pre><p id="ab0d52d0-ff11-43c5-8cdb-8612fdcfe00b" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h2 id="56a9aac6-acbd-4c3d-a054-dc265423c561" class="">2.2 - Lambda structure value</h2><p id="d94c7cae-5587-4611-86d2-f70259c53dbd" class="">Named structure are lambda structure with... a name, so every named structure has an implicit cast to the lambda structure it is made of. That behavior can&#x27;t be changed.</p><pre id="385e4bd9-6984-47cc-b56e-2353499438d7" class="code"><code>package main
+
+struct type A = {
+	age  int
+	name string
+}
+
+func main() {
+	var data struct{age int, name string}, data2 A = {18, &quot;Glycine&quot;}
+	data = data2 // ok !
+}</code></pre><p id="c5fae223-5787-4341-b48e-3333c805e4d6" class="">However, it is not possible to <code>cast</code> them as pointer (we&#x27;ll see pointer later). Because it would break the <code>get</code> spec&#x27;. <code>static</code> attributes aren&#x27;t keep in the <code>cast</code>.
+A lambda structure can be represented directly by a RValue.</p><pre id="25e3c7c7-5ddc-4422-9b25-87c4ad59903a" class="code"><code>package main
+
+func main() {
+	data := struct{age: 42, name: &quot;Magnolia&quot;}
+}</code></pre><p id="b05c5608-9021-45c8-baca-075d67df7252" class="">data is a lambda struct of type: <code>struct{age int, name string}</code>.</p><p id="9549cfe7-1d32-4cc9-ada9-128f7d2d66f5" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><h2 id="7a63e21d-3c5f-40c4-9521-1a24817dabcd" class="">2.3 - Lambda structure quickly</h2><p id="663ac321-1eeb-44f4-b4aa-a0e1637939c7" class="">As lambda struct may be really useful, there is shortcut to define them:</p><pre id="801fbb14-91ce-497d-b48c-3a9689171251" class="code"><code>package main
+
+func main() {
+	var data1 {{age int, name string}}
+	data2 := {{age: 42, name: &quot;Cyclamen&quot;}}
+}</code></pre><p id="1ee56744-368e-4688-8c76-0bcf2f50c30e" class=""><a href="">Top</a>    |    <a href="">Bottom</a></p><p id="92830d6f-d28b-42e2-9637-aafb7b8c20c8" class="">
+</p><p id="47e8e5e6-f17e-4a0f-a20e-d6c728e9c17f" class=""><a href="Types%20and%20cast%207d645f34db2b4301a046ab8483bb7a08.html">Previous Chapter</a>   |    <a href="">Top</a>    |    <a href="Arrays%20-%201%2034f8068aa57b43058ea6a963d1dbb256.html">Next Chapter</a></p><p id="25b10fd8-52df-4dc7-9dc4-3255db8c99eb" class="">
+</p></div></article></body></html><script>
+	var codes = document.getElementsByTagName('code');
+	for (var i = 0; i < codes.length; i++) {
+		codes.item(i).classList.add('prettyprint', 'lang-go')
+	}
+</script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=go;skin=desert"></script>

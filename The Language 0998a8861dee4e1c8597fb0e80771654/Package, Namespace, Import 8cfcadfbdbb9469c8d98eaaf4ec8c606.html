@@ -1,0 +1,771 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Package, Namespace, Import</title>
+		<style>
+			/* cspell:disable-file */
+			/* webkit printing magic: print all background colors */
+		html {
+			-webkit-print-color-adjust: exact;
+		}
+		* {
+			box-sizing: border-box;
+			-webkit-print-color-adjust: exact;
+		}
+		
+		html,
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		@media only screen {
+			body {
+				margin: 2em auto;
+				max-width: 900px;
+				color: rgb(55, 53, 47);
+			}
+		}
+		
+		body {
+			line-height: 1.5;
+			white-space: pre-wrap;
+		}
+		
+		a,
+		a.visited {
+			color: inherit;
+			text-decoration: underline;
+		}
+		
+		.pdf-relative-link-path {
+			font-size: 80%;
+			color: #444;
+		}
+		
+		h1,
+		h2,
+		h3 {
+			letter-spacing: -0.01em;
+			line-height: 1.2;
+			font-weight: 600;
+			margin-bottom: 0;
+		}
+		
+		.page-title {
+			font-size: 2.5rem;
+			font-weight: 700;
+			margin-top: 0;
+			margin-bottom: 0.75em;
+		}
+		
+		h1 {
+			font-size: 1.875rem;
+			margin-top: 1.875rem;
+		}
+		
+		h2 {
+			font-size: 1.5rem;
+			margin-top: 1.5rem;
+		}
+		
+		h3 {
+			font-size: 1.25rem;
+			margin-top: 1.25rem;
+		}
+		
+		.source {
+			border: 1px solid #ddd;
+			border-radius: 3px;
+			padding: 1.5em;
+			word-break: break-all;
+		}
+		
+		.callout {
+			border-radius: 3px;
+			padding: 1rem;
+		}
+		
+		figure {
+			margin: 1.25em 0;
+			page-break-inside: avoid;
+		}
+		
+		figcaption {
+			opacity: 0.5;
+			font-size: 85%;
+			margin-top: 0.5em;
+		}
+		
+		mark {
+			background-color: transparent;
+		}
+		
+		.indented {
+			padding-left: 1.5em;
+		}
+		
+		hr {
+			background: transparent;
+			display: block;
+			width: 100%;
+			height: 1px;
+			visibility: visible;
+			border: none;
+			border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+		}
+		
+		img {
+			max-width: 100%;
+		}
+		
+		@media only print {
+			img {
+				max-height: 100vh;
+				object-fit: contain;
+			}
+		}
+		
+		@page {
+			margin: 1in;
+		}
+		
+		.collection-content {
+			font-size: 0.875rem;
+		}
+		
+		.column-list {
+			display: flex;
+			justify-content: space-between;
+		}
+		
+		.column {
+			padding: 0 1em;
+		}
+		
+		.column:first-child {
+			padding-left: 0;
+		}
+		
+		.column:last-child {
+			padding-right: 0;
+		}
+		
+		.table_of_contents-item {
+			display: block;
+			font-size: 0.875rem;
+			line-height: 1.3;
+			padding: 0.125rem;
+		}
+		
+		.table_of_contents-indent-1 {
+			margin-left: 1.5rem;
+		}
+		
+		.table_of_contents-indent-2 {
+			margin-left: 3rem;
+		}
+		
+		.table_of_contents-indent-3 {
+			margin-left: 4.5rem;
+		}
+		
+		.table_of_contents-link {
+			text-decoration: none;
+			opacity: 0.7;
+			border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+		}
+		
+		table,
+		th,
+		td {
+			border: 1px solid rgba(55, 53, 47, 0.09);
+			border-collapse: collapse;
+		}
+		
+		table {
+			border-left: none;
+			border-right: none;
+		}
+		
+		th,
+		td {
+			font-weight: normal;
+			padding: 0.25em 0.5em;
+			line-height: 1.5;
+			min-height: 1.5em;
+			text-align: left;
+		}
+		
+		th {
+			color: rgba(55, 53, 47, 0.6);
+		}
+		
+		ol,
+		ul {
+			margin: 0;
+			margin-block-start: 0.6em;
+			margin-block-end: 0.6em;
+		}
+		
+		li > ol:first-child,
+		li > ul:first-child {
+			margin-block-start: 0.6em;
+		}
+		
+		ul > li {
+			list-style: disc;
+		}
+		
+		ul.to-do-list {
+			text-indent: -1.7em;
+		}
+		
+		ul.to-do-list > li {
+			list-style: none;
+		}
+		
+		.to-do-children-checked {
+			text-decoration: line-through;
+			opacity: 0.375;
+		}
+		
+		ul.toggle > li {
+			list-style: none;
+		}
+		
+		ul {
+			padding-inline-start: 1.7em;
+		}
+		
+		ul > li {
+			padding-left: 0.1em;
+		}
+		
+		ol {
+			padding-inline-start: 1.6em;
+		}
+		
+		ol > li {
+			padding-left: 0.2em;
+		}
+		
+		.mono ol {
+			padding-inline-start: 2em;
+		}
+		
+		.mono ol > li {
+			text-indent: -0.4em;
+		}
+		
+		.toggle {
+			padding-inline-start: 0em;
+			list-style-type: none;
+		}
+		
+		/* Indent toggle children */
+		.toggle > li > details {
+			padding-left: 1.7em;
+		}
+		
+		.toggle > li > details > summary {
+			margin-left: -1.1em;
+		}
+		
+		.selected-value {
+			display: inline-block;
+			padding: 0 0.5em;
+			background: rgba(206, 205, 202, 0.5);
+			border-radius: 3px;
+			margin-right: 0.5em;
+			margin-top: 0.3em;
+			margin-bottom: 0.3em;
+			white-space: nowrap;
+		}
+		
+		.collection-title {
+			display: inline-block;
+			margin-right: 1em;
+		}
+		
+		.simple-table {
+			margin-top: 1em;
+			font-size: 0.875rem;
+		}
+		
+		.simple-table-header {
+			background: rgb(247, 246, 243);
+			color: black;
+			font-weight: 500;
+		}
+		
+		time {
+			opacity: 0.5;
+		}
+		
+		.icon {
+			display: inline-block;
+			max-width: 1.2em;
+			max-height: 1.2em;
+			text-decoration: none;
+			vertical-align: text-bottom;
+			margin-right: 0.5em;
+		}
+		
+		img.icon {
+			border-radius: 3px;
+		}
+		
+		.user-icon {
+			width: 1.5em;
+			height: 1.5em;
+			border-radius: 100%;
+			margin-right: 0.5rem;
+		}
+		
+		.user-icon-inner {
+			font-size: 0.8em;
+		}
+		
+		.text-icon {
+			border: 1px solid #000;
+			text-align: center;
+		}
+		
+		.page-cover-image {
+			display: block;
+			object-fit: cover;
+			width: 100%;
+			height: 30vh;
+		}
+		
+		.page-header-icon {
+			font-size: 3rem;
+			margin-bottom: 1rem;
+		}
+		
+		.page-header-icon-with-cover {
+			margin-top: -0.72em;
+			margin-left: 0.07em;
+		}
+		
+		.page-header-icon img {
+			border-radius: 3px;
+		}
+		
+		.link-to-page {
+			margin: 1em 0;
+			padding: 0;
+			border: none;
+			font-weight: 500;
+		}
+		
+		p > .user {
+			opacity: 0.5;
+		}
+		
+		td > .user,
+		td > time {
+			white-space: nowrap;
+		}
+		
+		input[type="checkbox"] {
+			transform: scale(1.5);
+			margin-right: 0.6em;
+			vertical-align: middle;
+		}
+		
+		p {
+			margin-top: 0.5em;
+			margin-bottom: 0.5em;
+		}
+		
+		.image {
+			border: none;
+			margin: 1.5em 0;
+			padding: 0;
+			border-radius: 0;
+			text-align: center;
+		}
+		
+		.code,
+		code {
+			background: rgba(135, 131, 120, 0.15);
+			border-radius: 3px;
+			padding: 0.2em 0.4em;
+			border-radius: 3px;
+			font-size: 85%;
+			tab-size: 2;
+		}
+		
+		code {
+			color: #eb5757;
+		}
+		
+		.code {
+			padding: 1.5em 1em;
+		}
+		
+		.code-wrap {
+			white-space: pre-wrap;
+			word-break: break-all;
+		}
+		
+		.code > code {
+			background: none;
+			padding: 0;
+			font-size: 100%;
+			color: inherit;
+		}
+		
+		blockquote {
+			font-size: 1.25em;
+			margin: 1em 0;
+			padding-left: 1em;
+			border-left: 3px solid rgb(55, 53, 47);
+		}
+		
+		.bookmark {
+			text-decoration: none;
+			max-height: 8em;
+			padding: 0;
+			display: flex;
+			width: 100%;
+			align-items: stretch;
+		}
+		
+		.bookmark-title {
+			font-size: 0.85em;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			height: 1.75em;
+			white-space: nowrap;
+		}
+		
+		.bookmark-text {
+			display: flex;
+			flex-direction: column;
+		}
+		
+		.bookmark-info {
+			flex: 4 1 180px;
+			padding: 12px 14px 14px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+		
+		.bookmark-image {
+			width: 33%;
+			flex: 1 1 180px;
+			display: block;
+			position: relative;
+			object-fit: cover;
+			border-radius: 1px;
+		}
+		
+		.bookmark-description {
+			color: rgba(55, 53, 47, 0.6);
+			font-size: 0.75em;
+			overflow: hidden;
+			max-height: 4.5em;
+			word-break: break-word;
+		}
+		
+		.bookmark-href {
+			font-size: 0.75em;
+			margin-top: 0.25em;
+		}
+		
+		.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+		.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+		.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+		.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+		.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+		.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+		.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+		.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+		.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+		.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+		.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+		.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+		.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+		.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+		.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+		.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+		.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+		.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+		.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+		.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+		.highlight-default {
+			color: rgba(55, 53, 47, 1);
+		}
+		.highlight-gray {
+			color: rgba(120, 119, 116, 1);
+			fill: rgba(145, 145, 142, 1);
+		}
+		.highlight-brown {
+			color: rgba(159, 107, 83, 1);
+			fill: rgba(187, 132, 108, 1);
+		}
+		.highlight-orange {
+			color: rgba(217, 115, 13, 1);
+			fill: rgba(215, 129, 58, 1);
+		}
+		.highlight-yellow {
+			color: rgba(203, 145, 47, 1);
+			fill: rgba(203, 148, 51, 1);
+		}
+		.highlight-teal {
+			color: rgba(68, 131, 97, 1);
+			fill: rgba(108, 155, 125, 1);
+		}
+		.highlight-blue {
+			color: rgba(51, 126, 169, 1);
+			fill: rgba(91, 151, 189, 1);
+		}
+		.highlight-purple {
+			color: rgba(144, 101, 176, 1);
+			fill: rgba(167, 130, 195, 1);
+		}
+		.highlight-pink {
+			color: rgba(193, 76, 138, 1);
+			fill: rgba(205, 116, 159, 1);
+		}
+		.highlight-red {
+			color: rgba(212, 76, 71, 1);
+			fill: rgba(225, 111, 100, 1);
+		}
+		.highlight-gray_background {
+			background: rgba(241, 241, 239, 1);
+		}
+		.highlight-brown_background {
+			background: rgba(244, 238, 238, 1);
+		}
+		.highlight-orange_background {
+			background: rgba(251, 236, 221, 1);
+		}
+		.highlight-yellow_background {
+			background: rgba(251, 243, 219, 1);
+		}
+		.highlight-teal_background {
+			background: rgba(237, 243, 236, 1);
+		}
+		.highlight-blue_background {
+			background: rgba(231, 243, 248, 1);
+		}
+		.highlight-purple_background {
+			background: rgba(244, 240, 247, 0.8);
+		}
+		.highlight-pink_background {
+			background: rgba(249, 238, 243, 0.8);
+		}
+		.highlight-red_background {
+			background: rgba(253, 235, 236, 1);
+		}
+		.block-color-default {
+			color: inherit;
+			fill: inherit;
+		}
+		.block-color-gray {
+			color: rgba(120, 119, 116, 1);
+			fill: rgba(145, 145, 142, 1);
+		}
+		.block-color-brown {
+			color: rgba(159, 107, 83, 1);
+			fill: rgba(187, 132, 108, 1);
+		}
+		.block-color-orange {
+			color: rgba(217, 115, 13, 1);
+			fill: rgba(215, 129, 58, 1);
+		}
+		.block-color-yellow {
+			color: rgba(203, 145, 47, 1);
+			fill: rgba(203, 148, 51, 1);
+		}
+		.block-color-teal {
+			color: rgba(68, 131, 97, 1);
+			fill: rgba(108, 155, 125, 1);
+		}
+		.block-color-blue {
+			color: rgba(51, 126, 169, 1);
+			fill: rgba(91, 151, 189, 1);
+		}
+		.block-color-purple {
+			color: rgba(144, 101, 176, 1);
+			fill: rgba(167, 130, 195, 1);
+		}
+		.block-color-pink {
+			color: rgba(193, 76, 138, 1);
+			fill: rgba(205, 116, 159, 1);
+		}
+		.block-color-red {
+			color: rgba(212, 76, 71, 1);
+			fill: rgba(225, 111, 100, 1);
+		}
+		.block-color-gray_background {
+			background: rgba(241, 241, 239, 1);
+		}
+		.block-color-brown_background {
+			background: rgba(244, 238, 238, 1);
+		}
+		.block-color-orange_background {
+			background: rgba(251, 236, 221, 1);
+		}
+		.block-color-yellow_background {
+			background: rgba(251, 243, 219, 1);
+		}
+		.block-color-teal_background {
+			background: rgba(237, 243, 236, 1);
+		}
+		.block-color-blue_background {
+			background: rgba(231, 243, 248, 1);
+		}
+		.block-color-purple_background {
+			background: rgba(244, 240, 247, 0.8);
+		}
+		.block-color-pink_background {
+			background: rgba(249, 238, 243, 0.8);
+		}
+		.block-color-red_background {
+			background: rgba(253, 235, 236, 1);
+		}
+		.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+		.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+		.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+		.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+		.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+		.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+		.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+		.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+		.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+		
+		.checkbox {
+			display: inline-flex;
+			vertical-align: text-bottom;
+			width: 16;
+			height: 16;
+			background-size: 16px;
+			margin-left: 2px;
+			margin-right: 5px;
+		}
+		
+		.checkbox-on {
+			background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+		}
+		
+		.checkbox-off {
+			background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+		}
+			
+		</style>
+	</head>
+	<body>
+		<article id="8cfcadfb-dbb9-469c-8d98-eaaf4ec8c606" class="page sans"><header><h1 class="page-title">Package, Namespace, Import</h1></header><div class="page-body"><nav id="96594413-a130-4f6c-8415-faf5ee378073" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5ffcc149-6284-4b36-a01f-e96ec93c11db">1- Packages &amp; Namespace</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bf10b0bd-8973-4273-a360-aff6e59923df">1.1 - packages</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1b2e8ea2-4dc4-438b-9b4e-daf30103dd7c">1.2 - Namespaces</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#68d4f10f-9537-44cd-b169-9d235db1d470">1.2.1 - Create one</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#cc458904-5bd3-492a-94e5-13bcf0b9196a">1.2.2 Extend namespace</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f45fa38a-f4c9-4f44-9752-3092e0d61543">1.2.3 Import extended namespace</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4a3ca546-3f23-4993-95c7-3bd593fdb7ff">2- Import</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#26e978d7-f0fb-4109-b720-a74b16a1389b">2.1 - Import from the same project</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#aee34127-cf92-4dfd-92a9-ecccffe5b0b2">2.2 - Import from another project</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ac34d6d8-ddc0-4fa4-84c6-db44a1b574de">2.3 - Import from file (non project)</a></div></nav><h1 id="5ffcc149-6284-4b36-a01f-e96ec93c11db" class="">1- Packages &amp; Namespace</h1><h2 id="bf10b0bd-8973-4273-a360-aff6e59923df" class="">1.1 - packages</h2><p id="4cf2b7b5-bf9a-47f0-913c-6887e9263428" class="">Every code in <em>Nu</em> must be in a <code>package</code>. The <code>package</code> structures the code and the importations. In a project, a package <strong>must</strong> be represented by a directory of the same name and with the extension <code>.pkg.nu</code>; all code written in that directory belongs to the package of the same name. It is not possible to add element to a <code>package</code> if we are not currently in that <code>package</code>. 
+A <code>package</code> in another <code>package</code> must also be represented by a directory of the same name. However, instead of naming the <code>package</code> simply with the name of its directory, it must be the path from the first <code>package</code>, where &#x27;/&#x27; are &#x27;.&#x27;
+
+<em>Example.nu.project/Package1.pkg.nu/Package2.pkg.nu/file.nu</em></p><pre id="d942f464-b49f-4053-b680-e529b092ea50" class="code"><code>// file.nu; Package1.pkg.nu/Package2.pkg.nu --&gt; Package1.Package2
+package Package1.Package2
+
+// code</code></pre><p id="a4c59a80-579c-4446-ad48-0e41071a49c6" class="">
+Inside a <code>package</code> every declaration starting with uppercase is exported except if the keyword <code>private</code> is used before the declaration, and every declaration starting with lowercase are, in opposite only accessible from inside the <code>package</code>. A <code>package</code> can also be <code>private</code>. If a top folder <code>package</code> is private, it means it won&#x27;t be visible by other project.
+<code>namespace</code> declaration are particular. Namespace are exported by default no matter what name they have. To make a <code>namespace</code> <code>private</code>, we also need to add that keyword before the declaration.
+Finally, there is a last degree of visibility whom allows to be private to the current file: <code>fileprivate</code>. It is not possible to make a <code>namespace</code> as <code>fileprivate</code>.
+
+<em>example:
+</em>
+<a href="">Top</a> | <a href="">Bottom</a></p><pre id="2c3a720d-c19a-41fd-adf9-ee6f9062fc40" class="code code-wrap"><code>// agreed that we are in the package Pkg1 in file: file1.nu
+package Pkg1
+
+namespace NP1 {
+	const val = 42 // not exported from out of the namespace
+	const Val = val // exported
+}
+
+const Val = 42 // exported
+private const Val2 = 18 // only visible inside Pkg1
+fileprivate const val = Val // only accessible inside that file 
+
+private namespace NP2 { // only visible inside Pkg1
+	const val = 42 // only visible inside the namespace
+	const Val = val
+}
+
+// agreed that we are in the package Pkg2 in file: file2.nu of the same project
+package Pkg2
+import Pkg1
+
+const my_val = Pkg1.NP1.Val // ok, my_val is not exported
+// my_val = Pkg1.Val2 // ko, Val2 is declared private</code></pre><h2 id="1b2e8ea2-4dc4-438b-9b4e-daf30103dd7c" class="">1.2 - Namespaces</h2><p id="e41058e0-b039-4feb-9a03-9bb10abed8fd" class="">Namespace are a way to structure code like <code>package</code>. However, unlike <code>package</code>, <code>namespace</code>, doesn&#x27;t need to be represented by a directory. And what&#x27;s really makes the difference is that <code>namespace</code> can be extended from everywhere and automatically import the whole <code>namespace</code>.
+But, when extending a <code>namespace</code> from out of its <code>package</code> location, it won&#x27;t be possible to access the <em>namespace-protected</em> elements.</p><h3 id="68d4f10f-9537-44cd-b169-9d235db1d470" class="">1.2.1 - Create one</h3><p id="79e147ae-8472-4a1f-9dec-7bd0e4824b7c" class="">To create a <code>namespace</code>, we simply need to use the keyword: <code>namespace</code>, followed by its name.
+While in the same package, a namespace can be &quot;created&quot; more than one time. It is actually extended, so duplicating code will be a compiler error.
+Let&#x27;s see example:</p><pre id="1bc3d6b7-5d1c-4d62-8792-87771ff976f7" class="code"><code>// agreed that we are int the package TypesAddon in the file file1.nu
+package TypesAddon
+
+type MyInt = int // exported
+
+namespace Number {
+	const! pi = 5419351 \ 1725033 // pi approximate at 10^-10
+	func Square(v MyInt) MyInt =&gt; v * v // exported, use of MyInt from package TypeAddon
+}
+
+//agreed that we are in the package TypesAddon in the file file2.nu
+package TypesAddon
+
+namespace Number { // extend the existing one
+	func! PI() fraction =&gt; pi // ok, can use pi since it is extended in the same package
+}
+
+// agreed that we are in the pacakge main in the file main.nu
+
+package main
+
+import {
+	TypesAddon as ta
+	Std io.console as cio
+}
+
+namespace ta.Number { // exporting the namespace TypesAddon.Number !!
+	func Square(v fraction) fraction =&gt; v * v
+}
+
+func main() {
+	cio.Println(ta.Number.Square(ta.Number.PI()))
+	// print: 29 369 365 261 201 \ 2 975 738 851 089
+}</code></pre><p id="800d0046-f936-4f2e-b43d-9620fa8a8448" class=""><a href="">Top</a> | <a href="">Bottom</a></p><h3 id="cc458904-5bd3-492a-94e5-13bcf0b9196a" class="">1.2.2 Extend namespace</h3><p id="eaaf7fb7-916d-46a1-a3d1-a1cab9484c6e" class="">It is possible to extend a <code>namespace</code>. But it has to be exported.
+To do so we simply mark the full name of the <code>namespace</code> from the top package.
+If we are in a sub-package, there is no need to import anything, but if not the <code>package</code> that contains the <code>namespace</code> must be imported.
+<span style="border-bottom:0.05em solid">Remarque:</span> it is better to extend a namespace over creating a new one.</p><h3 id="f45fa38a-f4c9-4f44-9752-3092e0d61543" class="">1.2.3 Import extended namespace</h3><p id="eb3614e1-806c-49f8-83a9-4946f3cf53a5" class="">To use extended namespace from another <code>package</code>, the <code>package</code> that extend the <code>namespace</code> has to be imported in addition of the base <code>namespace</code>.</p><h1 id="4a3ca546-3f23-4993-95c7-3bd593fdb7ff" class="">2- Import</h1><p id="3b44ecab-3e56-4d4f-8698-aff11fb9e20b" class="">There are 3 kind of importation in <em>Nu</em>.
+But every import are preceded by the keyword <code>import</code>. That keyword <strong>must</strong> appear only once in a file, so if there is multiple import, they must be surround by &#x27;{}&#x27;.
+It is possible to import a package, or a namespace, and it is possible to rename them (it is even mandatory if 2 have same name)</p><h2 id="26e978d7-f0fb-4109-b720-a74b16a1389b" class="">2.1 - Import from the same project</h2><p id="6a06665a-371f-4978-803f-9d9d90dc0adb" class="">if we are in a project, it is possible to import element from the same project, that may be in a different package.
+To do so, simply write the <code>package</code> name.</p><pre id="f6d120c1-0eda-4cbf-b2ec-31de57fa43a9" class="code"><code>package aPkg
+import AnotherPkg
+
+// code</code></pre><p id="65a0b61f-8af8-4f9c-ad61-b6c0b244d2f9" class="">Then the whole package is imported, and to use exported element from &#x27;AnotherPkg&#x27; we must write: <code>AnotherPkg.</code>EXPORTED ELEMENT.
+It is possible to avoid that usage.</p><pre id="0c40fd45-a6cb-4b04-807e-674eaf968b69" class="code"><code>package aPkg
+import AnotherPkg as _
+
+// code</code></pre><p id="4a5f8e9a-71f0-468e-ba65-ade784fedf99" class=""><code>as</code> allows to use a different symbol to refer what is imported. Here, we say <code>as _</code>, which means, there is no need to use a symbol, you can directly use the exported element from &quot;AnotherPkg&quot;.</p><p id="b4d14f7e-f5e3-40b9-ba92-4c8506afc6bd" class=""><a href="">Top</a> | <a href="">Bottom</a></p><h2 id="aee34127-cf92-4dfd-92a9-ecccffe5b0b2" class="">2.2 - Import from another project</h2><p id="2a18ec3d-745f-44a9-a609-a69a40cae96e" class="">In a project or not, it is also possible to import element that are in another Project.
+First the project must be refered, then what we want to import.</p><pre id="44ffcddf-c528-4598-9725-dfae64e6614e" class="code"><code>package aPkg
+import {
+	Std io.console as cio
+	&quot;https://www.github.com/NuSample/GitImport&quot; pkg.ns
+}
+
+// some code</code></pre><p id="beed1c29-d065-4bcc-a07a-dffd02907753" class="">Here &quot;Std&quot; is the Standard Project of Nu, it is on your computer with the <em>nu-cmd</em> install.
+If a project is on your computer, <em>nu-cmd</em> should be able to find it, then there is only need to put the project name. If 2 projects have the same name or if a project isn&#x27;t on the computer, an url must be given in literal string.
+The string may start with &quot;http&quot;, &quot;https&quot;, &quot;file://&quot; or &quot;relative/&quot;
+http(s) must be an url to a git repository with the &#x27;.nu.project&#x27; or &#x27;.nu.config&#x27;. &quot;file://&quot; is the file protocol (file://host/absolute/path, or if host is localhost: file:///path), &quot;relative/&quot; is the path to the .nu.project or .nu.config with relative path.</p><p id="d049a098-15fc-41ae-ae86-774cc54f39f0" class=""><a href="">Top</a> | <a href="">Bottom</a></p><h2 id="ac34d6d8-ddc0-4fa4-84c6-db44a1b574de" class="">2.3 - Import from file (non project)</h2><p id="37093b09-55c7-452e-83db-b06c5800bbdd" class="">Finally, it is possible to import file by themselves. It is not encourage to do so, but you may want to load a script file.
+To do so, you must specify the project name as &#x27;_&#x27; and put the path in literal string like 2.2 part, but it is mandatory to &quot;rename&quot; them.</p><pre id="15d926d5-85dd-4572-8e51-59d427eda7dd" class="code"><code>package aPkg
+import {
+	_ &quot;https://www.github.com/NuSample/ScriptGitImport/master/script.nu&quot; as script
+}
+
+// some code</code></pre><p id="a4df2ca8-25b6-493f-a55e-8a08d76c5a38" class="">The path must lead to the file itself.</p><p id="9f786f46-780a-4624-b45d-24108c75f45c" class="">Previous Chapter    |   <a href=""> Top</a><a href="Variables,%20Constants,%20Values%203071bfe7f0974ec28985218b6f1ed522.html"> </a>   |   <a href="Variables,%20Constants,%20Values%203071bfe7f0974ec28985218b6f1ed522.html"> Next Chapter</a></p></div></article>
+</body></html>
+<script>
+	var codes = document.getElementsByTagName('code');
+	for (var i = 0; i < codes.length; i++) {
+		codes.item(i).classList.add('prettyprint', 'lang-go')
+	}
+</script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?lang=go;skin=desert"></script>
